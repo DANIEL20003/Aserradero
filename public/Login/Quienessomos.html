@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASERRADERÍA PEQUINEZ | QUIÉNES SOMOS</title>
+    <meta name="description" content="Conoce la historia, misión y valores de Aserradería Pequinez. Más de 15 años transformando la madera en productos de calidad para tu hogar.">
+    <!-- Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <!-- Bootstrap ICONS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Estilos del header principal -->
+    <link rel="stylesheet" href="../css/Loging.css">
+    <link rel="stylesheet" href="../css/forest-theme.css">
+    <!-- Custom CSS -->
+    <link href="../css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/quienessomos.css">
+    <link rel="stylesheet" href="../css/modals.css">
+    <link rel="stylesheet" href="../css/quienessomos-professional.css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <!-- Estilos para forzar colores forestales en el footer -->
+    <style>
+        .footer {
+            background: linear-gradient(135deg, #1a2e0a 0%, #2d5016 100%) !important;
+            border-top: 3px solid #4a7c59 !important;
+            color: white !important;
+        }
+        .footer * {
+            color: white !important;
+        }
+        .footer .badge {
+            background-color: rgba(255, 255, 255, 0.9) !important;
+            color: #2d5016 !important;
+        }
+        .footer .bi-phone, .footer .bi-envelope, .footer .bi-geo-alt {
+            color: #d4a574 !important;
+        }
+        .footer .bi-calendar-week, .footer .bi-calendar-day {
+            color: #6b8e23 !important;
+        }
+        .footer a:hover {
+            color: #d4a574 !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- ENCABEZADO - Idéntico al del index -->
+    <header class="header">
+        <a href="../../index.html" class="logo">
+            <ion-icon name="home" class="icono-casa"></ion-icon>
+            <span>Aserradería Pequinez</span>
+        </a>
+        
+        <!-- CAMPO DE BÚSQUEDA -->
+        <div class="search-container">
+            <div class="search-box">
+                <ion-icon name="search" class="search-icon"></ion-icon>
+                <input type="text" placeholder="Buscar productos de madera..." class="search-input" id="searchInput">
+                <button class="search-btn" onclick="realizarBusqueda()">
+                    <ion-icon name="filter"></ion-icon>
+                </button>
+            </div>
+        </div>
+        
+        <nav class="nav">
+            <a href="#mision">Misión</a>
+            <a href="#vision">Visión</a>
+            <a href="#valores">Valores</a>
+            <a href="../../index.html" class="btn-volver" style="background-color: #6b8e23; color: #fff; border-radius: 20px; padding: 6px 18px; transition: background 0.2s;">
+                Página Principal
+            </a>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero bg-gradient-primary text-white position-relative overflow-hidden">
+        <div class="hero-overlay position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(135deg, rgba(45, 80, 22, 0.9), rgba(107, 142, 35, 0.8));"></div>
+        
+        <!-- Elementos decorativos flotantes -->
+        <div class="floating-elements position-absolute w-100 h-100">
+            <div class="float-element" style="top: 20%; left: 10%; animation-delay: 0s;">🪵</div>
+            <div class="float-element" style="top: 60%; right: 15%; animation-delay: 1s;">�</div>
+            <div class="float-element" style="top: 40%; left: 80%; animation-delay: 2s;">�</div>
+            <div class="float-element" style="top: 80%; left: 20%; animation-delay: 3s;">🌲</div>
+        </div>
+        
+        <div class="container position-relative py-5" style="z-index: 2;">
+            <div class="row align-items-center min-vh-70">
+                <div class="col-lg-6 text-center text-lg-start mb-4 mb-lg-0">
+                    <div class="hero-text">
+                        <!-- Badge de bienvenida -->
+                        <div class="badge text-white fs-6 px-3 py-2 rounded-pill mb-4 animate__animated animate__bounceIn" style="background: linear-gradient(135deg, #6b8e23, #8fbc34);">
+                            <i class="bi bi-tree-fill me-1"></i>
+                            ¡Bienvenidos a nuestra familia maderera!
+                        </div>
+                        
+                        <h1 class="display-3 fw-bold mb-4 animate__animated animate__fadeInUp">
+                            🌲 Del Bosque a Tu Hogar 🪵
+                        </h1>
+                        
+                        <p class="lead mb-4 fs-4 animate__animated animate__fadeInUp animate__delay-1s" style="line-height: 1.6;">
+                            Más de <span class="fw-bold" style="color: #d4a574;">15 años</span> transformando la madera de calidad 
+                            en productos perfectos para tu hogar con excelencia artesanal y tradición familiar.
+                        </p>
+                        
+                        <div class="wave-decoration d-flex justify-content-center justify-content-lg-start gap-3 mb-4">
+                            <div class="wave-icon">
+                                <ion-icon name="leaf" class="text-success fs-1" style="color: #8fbc34 !important;"></ion-icon>
+                            </div>
+                            <div class="wave-icon">
+                                <ion-icon name="hammer" class="fs-1" style="color: #d4a574 !important;"></ion-icon>
+                            </div>
+                            <div class="wave-icon">
+                                <ion-icon name="leaf" class="text-success fs-1" style="color: #8fbc34 !important;"></ion-icon>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-start">
+                            <a href="#presentacion" class="btn btn-light btn-lg px-4 py-3 rounded-pill shadow-lg">
+                                <i class="bi bi-arrow-down-circle me-2"></i>
+                                Conoce nuestra historia
+                            </a>
+                            <a href="../../index.html" class="btn btn-forest-primary btn-lg px-4 py-3 rounded-pill shadow-lg">
+                                <i class="bi bi-house-door me-2"></i>
+                                Página Principal
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 text-center">
+                    <div class="hero-image position-relative">
+                        <!-- Círculo decorativo con pulso -->
+                        <div class="circle-pulse position-absolute top-50 start-50 translate-middle"></div>
+                        
+                        <div class="mascot-container position-relative d-inline-block">
+                            <div class="bg-white rounded-circle shadow-lg p-4 position-relative overflow-hidden">
+                                <!-- Efecto de ondas -->
+                                <div class="water-wave position-absolute bottom-0 start-0 w-100"></div>
+                                
+                                <img src="../img/icons/Leñador-removebg-preview.png" 
+                                     alt="Logo Aserradería Pequinez" 
+                                  
+                                     style="max-width: 280px; height: auto; position: relative; z-index: 2;">
+                            </div>
+                            
+                            <!-- Burbujas decorativas -->
+                            <div class="bubble bubble-1"></div>
+                            <div class="bubble bubble-2"></div>
+                            <div class="bubble bubble-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Wave decorativa mejorada -->
+        <div class="position-absolute bottom-0 start-0 w-100">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" style="height: 80px; width: 100%;">
+                <defs>
+                    <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#f8f9fa;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#ffffff;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <path d="M0,120 C150,80 350,40 600,60 C850,80 1050,40 1200,80 L1200,120 Z" fill="url(#waveGradient)"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- PRESENTACIÓN -->
+    <section id="presentacion" class="presentacion py-5" style="background: linear-gradient(135deg, #f0f5ed 0%, #e8f2e3 100%);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-10">
+                    <div class="intro-card rounded-4 shadow-lg p-5 border-0" style="background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px);">
+                        <div class="text-center mb-5">
+                            <h2 class="display-5 fw-bold mb-4" style="color: #2d4a1f;">🪵 Bienvenidos a Aserradería Pequinez</h2>
+                            <div class="mx-auto rounded-pill mb-4" style="width: 80px; height: 4px; background: #5a7c47;"></div>
+                        </div>
+                        <p class="intro-text fs-5 text-center mb-5 lh-lg" style="color: #4a6a3a;">
+                            Somos una empresa familiar que nació del amor por la madera y la pasión por ofrecer 
+                            productos de carpintería de la más alta calidad. En cada pieza que elaboramos, 
+                            llevamos la tradición artesanal y el compromiso con la excelencia que nos caracteriza.
+                        </p>
+                        <div class="row g-4">
+                            <div class="col-md-4 text-center">
+                                <div class="stat-card h-100">
+                                    <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px; background: #5a7c47;">
+                                        <span class="stat-number fs-3 fw-bold text-white">15+</span>
+                                    </div>
+                                    <h5 class="stat-label fw-semibold" style="color: #2d4a1f;">Años de experiencia</h5>
+                                    <p class="small" style="color: #4a6a3a;">Décadas perfeccionando nuestro arte</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <div class="stat-card h-100">
+                                    <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px; background: #5a7c47;">
+                                        <span class="stat-number fs-3 fw-bold text-white">100K+</span>
+                                    </div>
+                                    <h5 class="stat-label fw-semibold" style="color: #2d4a1f;">Clientes satisfechos</h5>
+                                    <p class="small" style="color: #4a6a3a;">Familias que confían en nosotros</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <div class="stat-card h-100">
+                                    <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px; background: #5a7c47;">
+                                        <span class="stat-number fs-3 fw-bold text-white">100%</span>
+                                    </div>
+                                    <h5 class="stat-label fw-semibold" style="color: #2d4a1f;">Productos de madera</h5>
+                                    <p class="small" style="color: #4a6a3a;">Garantía de calidad superior</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MISIÓN -->
+    <section id="mision" class="mision py-5" style="background: linear-gradient(135deg, #f0f5ed 0%, #e8f2e3 100%);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-10">
+                    <div class="content-card rounded-4 shadow-lg p-5 border-0" style="background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px);">
+                        <div class="row align-items-center">
+                            <div class="col-lg-3 text-center mb-4 mb-lg-0">
+                                <div class="icon-container rounded-circle d-inline-flex align-items-center justify-content-center shadow" style="width: 120px; height: 120px; background: #5a7c47;">
+                                    <ion-icon name="target" class="section-icon text-white" style="font-size: 3rem;"></ion-icon>
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <h2 class="display-6 fw-bold mb-4" style="color: #2d4a1f;">🎯 Nuestra Misión</h2>
+                                <p class="fs-5 lh-lg mb-4" style="color: #4a6a3a;">
+                                    Proveer productos de madera de alta calidad, sostenibles y elaborados con excelencia, 
+                                    manteniendo la tradición artesanal mientras adoptamos prácticas 
+                                    responsables con el medio ambiente. Nos comprometemos a ser el aliado 
+                                    perfecto entre el bosque y las familias ecuatorianas, garantizando que cada 
+                                    producto llegue a su hogar con la calidad del primer día.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="row g-4 mt-4">
+                            <div class="col-lg-4">
+                                <div class="mission-point h-100 p-4 rounded-3" style="background: rgba(255, 255, 255, 0.4); border-left: 4px solid #5a7c47;">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="point-icon rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px; background: #5a7c47;">
+                                            <ion-icon name="hammer" class="text-white fs-5"></ion-icon>
+                                        </div>
+                                        <h5 class="fw-bold mb-0" style="color: #2d4a1f;">Calidad Artesanal</h5>
+                                    </div>
+                                    <p class="mb-0" style="color: #4a6a3a;">Productos de madera elaborados con técnicas tradicionales y máxima calidad</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="mission-point h-100 p-4 rounded-3" style="background: rgba(255, 255, 255, 0.4); border-left: 4px solid #5a7c47;">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="point-icon rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px; background: #5a7c47;">
+                                            <ion-icon name="leaf" class="text-white fs-5"></ion-icon>
+                                        </div>
+                                        <h5 class="fw-bold mb-0" style="color: #2d4a1f;">Madera Sostenible</h5>
+                                    </div>
+                                    <p class="mb-0" style="color: #4a6a3a;">Métodos responsables que protegen nuestros bosques para futuras generaciones</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="mission-point h-100 p-4 rounded-3" style="background: rgba(255, 255, 255, 0.4); border-left: 4px solid #5a7c47;">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="point-icon rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px; background: #5a7c47;">
+                                            <ion-icon name="people" class="text-white fs-5"></ion-icon>
+                                        </div>
+                                        <h5 class="fw-bold mb-0" style="color: #2d4a1f;">Comunidad Local</h5>
+                                    </div>
+                                    <p class="mb-0" style="color: #4a6a3a;">Colaboración directa con productores forestales artesanales de nuestra región</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VISIÓN -->
+    <section id="vision" class="vision py-5" style="background: linear-gradient(135deg, #f0f5ed 0%, #e8f2e3 100%); position: relative; overflow: hidden;">
+        <!-- Elementos decorativos forestales de fondo -->
+        <div class="forest-background position-absolute w-100 h-100" style="opacity: 0.04; z-index: 1;">
+            <div style="position: absolute; top: 15%; right: 10%; font-size: 3.5rem; color: #2d5016;">🌿</div>
+            <div style="position: absolute; top: 50%; left: 8%; font-size: 2.8rem; color: #4a7c59;">🍂</div>
+            <div style="position: absolute; bottom: 25%; right: 15%; font-size: 2.4rem; color: #6b8e23;">🌱</div>
+            <div style="position: absolute; top: 70%; left: 75%; font-size: 3rem; color: #2d5016;">🌲</div>
+        </div>
+        
+        <div class="container position-relative" style="z-index: 2;">
+            <div class="row justify-content-center">
+                <div class="col-xl-10">
+                    <div class="content-card bg-white rounded-4 shadow-lg p-5 border-0" style="border-right: 5px solid #6b8e23 !important; background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px) !important;">
+                        <div class="row align-items-center">
+                            <div class="col-lg-9 order-lg-1">
+                                <h2 class="display-6 fw-bold mb-4" style="color: #2d5016 !important;">🔭 Nuestra Visión</h2>
+                                <p class="fs-5 text-muted lh-lg mb-4">
+                                    Ser la aserradería líder en la región, reconocida por nuestra excelencia 
+                                    en calidad, innovación en servicios y compromiso con la sostenibilidad forestal. 
+                                    Aspiramos a expandir nuestro alcance manteniendo los valores familiares 
+                                    que nos fundaron, contribuyendo al desarrollo de la industria maderera 
+                                    local y siendo un referente en la comercialización responsable de productos de madera.
+                                </p>
+                            </div>
+                            <div class="col-lg-3 order-lg-2 text-center mb-4 mb-lg-0">
+                                <div class="icon-container rounded-circle d-inline-flex align-items-center justify-content-center shadow" style="width: 120px; height: 120px; background: linear-gradient(135deg, #6b8e23, #8fbc34) !important;">
+                                    <ion-icon name="telescope" class="section-icon text-white" style="font-size: 3rem;"></ion-icon>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row g-4 mt-4">
+                            <div class="col-lg-4">
+                                <div class="vision-goal h-100 text-center p-4 rounded-3 border-top border-4" style="background: rgba(255, 255, 255, 0.4); border-top-color: #4a7c59 !important;">
+                                    <div class="goal-icon rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px; background: linear-gradient(135deg, #4a7c59, #6b8e23);">
+                                        <ion-icon name="trending-up" class="text-white fs-4"></ion-icon>
+                                    </div>
+                                    <h5 class="fw-bold mb-3" style="color: #2d5016;">Crecimiento Sostenible</h5>
+                                    <p class="text-muted mb-0">Expandir responsablemente preservando la calidad que nos distingue y manteniendo nuestros valores familiares</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="vision-goal h-100 text-center p-4 rounded-3 border-top border-4" style="background: rgba(255, 255, 255, 0.4); border-top-color: #6b8e23 !important;">
+                                    <div class="goal-icon rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px; background: linear-gradient(135deg, #6b8e23, #8fbc34);">
+                                        <ion-icon name="shield-checkmark" class="text-white fs-4"></ion-icon>
+                                    </div>
+                                    <h5 class="fw-bold mb-3" style="color: #2d5016;">Compromiso Ambiental</h5>
+                                    <p class="text-muted mb-0">Liderar en prácticas ecológicas forestales, siendo pioneros en la conservación de nuestros ecosistemas</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="vision-goal h-100 text-center p-4 rounded-3 border-top border-4" style="background: rgba(255, 255, 255, 0.4); border-top-color: #a0522d !important;">
+                                    <div class="goal-icon rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px; background: linear-gradient(135deg, #a0522d, #d4a574);">
+                                        <ion-icon name="handshake" class="text-white fs-4"></ion-icon>
+                                    </div>
+                                    <h5 class="fw-bold mb-3" style="color: #2d5016;">Fortalecimiento Comunitario</h5>
+                                    <p class="text-muted mb-0">Impulsar la economía maderera local creando oportunidades para nuestras comunidades rurales</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VALORES -->
+    <section id="valores" class="valores py-5" style="background: linear-gradient(135deg, #f0f5ed 0%, #e8f2e3 100%); position: relative; overflow: hidden;">
+        <!-- Elementos decorativos forestales de fondo -->
+        <div class="forest-background position-absolute w-100 h-100" style="opacity: 0.03; z-index: 1;">
+            <div style="position: absolute; top: 20%; left: 12%; font-size: 2.5rem; color: #2d5016;">🌾</div>
+            <div style="position: absolute; top: 40%; right: 10%; font-size: 3rem; color: #4a7c59;">🌳</div>
+            <div style="position: absolute; bottom: 30%; left: 8%; font-size: 2.8rem; color: #6b8e23;">🌿</div>
+            <div style="position: absolute; top: 65%; right: 75%; font-size: 2.2rem; color: #2d5016;">🍃</div>
+        </div>
+        
+        <div class="container position-relative" style="z-index: 2;">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold mb-4" style="color: #2d5016 !important;">🌟 Nuestros Valores</h2>
+                <div class="mx-auto rounded-pill mb-4" style="width: 80px; height: 4px; background: linear-gradient(135deg, #4a7c59, #6b8e23);"></div>
+                <p class="lead text-muted">Los principios que guían cada día nuestro trabajo</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="valor-card h-100 rounded-4 shadow-lg p-4 text-center border-0 hover-lift" style="background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); border: 2px solid rgba(255, 255, 255, 0.3);">
+                        <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-4 shadow" style="width: 80px; height: 80px; background: linear-gradient(135deg, #dc3545, #e85a67);">
+                            <ion-icon name="heart" class="text-white" style="font-size: 2.5rem;"></ion-icon>
+                        </div>
+                        <h4 class="fw-bold mb-3" style="color: #2d5016;">Pasión</h4>
+                        <p class="text-muted mb-0">Amor genuino por lo que hacemos y por servir a nuestros clientes con dedicación</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="valor-card h-100 rounded-4 shadow-lg p-4 text-center border-0 hover-lift" style="background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); border: 2px solid rgba(255, 255, 255, 0.3);">
+                        <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-4 shadow" style="width: 80px; height: 80px; background: linear-gradient(135deg, #4a7c59, #6b8e23);">
+                            <ion-icon name="shield-checkmark" class="text-white" style="font-size: 2.5rem;"></ion-icon>
+                        </div>
+                        <h4 class="fw-bold mb-3" style="color: #2d5016;">Calidad</h4>
+                        <p class="text-muted mb-0">Compromiso inquebrantable con la excelencia en cada producto que ofrecemos</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="valor-card h-100 rounded-4 shadow-lg p-4 text-center border-0 hover-lift" style="background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); border: 2px solid rgba(255, 255, 255, 0.3);">
+                        <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-4 shadow" style="width: 80px; height: 80px; background: linear-gradient(135deg, #a0522d, #d4a574);">
+                            <ion-icon name="handshake" class="text-white" style="font-size: 2.5rem;"></ion-icon>
+                        </div>
+                        <h4 class="fw-bold mb-3" style="color: #2d5016;">Confianza</h4>
+                        <p class="text-muted mb-0">Relaciones duraderas basadas en honestidad, transparencia y respeto mutuo</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="valor-card h-100 rounded-4 shadow-lg p-4 text-center border-0 hover-lift" style="background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); border: 2px solid rgba(255, 255, 255, 0.3);">
+                        <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-4 shadow" style="width: 80px; height: 80px; background: linear-gradient(135deg, #6b8e23, #8fbc34);">
+                            <ion-icon name="earth" class="text-white" style="font-size: 2.5rem;"></ion-icon>
+                        </div>
+                        <h4 class="fw-bold mb-3" style="color: #2d5016;">Sostenibilidad</h4>
+                        <p class="text-muted mb-0">Respeto y cuidado por nuestros bosques y recursos forestales para el futuro</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer text-white mt-5" style="background: linear-gradient(135deg, #1a2e0a 0%, #2d5016 100%) !important; border-top: 3px solid #4a7c59 !important;">
+        <div class="container py-5">
+            <div class="row g-4">
+                <!-- Información de la empresa -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-brand mb-4">
+                        <h5 class="fw-bold mb-3">
+                            <ion-icon name="storefront-outline" class="me-2"></ion-icon>
+                            Aserradería Pequinez
+                        </h5>
+                        <p class="mb-3 opacity-75">
+                            🌲 Maderas de calidad para tu hogar. Más de 25 años ofreciendo productos de madera 
+                            selecta y elaborada para las familias ecuatorianas.
+                        </p>
+                        <div class="d-flex gap-2">
+                            <span class="badge bg-light text-primary px-3 py-2">
+                                <i class="bi bi-award-fill me-1"></i>
+                                Calidad Premium
+                            </span>
+                            <span class="badge bg-light text-primary px-3 py-2">
+                                <i class="bi bi-tree-fill me-1"></i>
+                                Madera Selecta
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contacto -->
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="fw-bold mb-3">
+                        <i class="bi bi-telephone-fill me-2"></i>
+                        Contacto
+                    </h6>
+                    <div class="contact-info">
+                        <p class="mb-2 opacity-75">
+                            <i class="bi bi-phone me-2" style="color: #d4a574;"></i>
+                            <strong>+593 992470053</strong>
+                        </p>
+                        <p class="mb-2 opacity-75">
+                            <i class="bi bi-envelope me-2" style="color: #d4a574;"></i>
+                            maderas@pequinez.com
+                        </p>
+                        <p class="mb-2 opacity-75">
+                            <i class="bi bi-geo-alt me-2" style="color: #d4a574;"></i>
+                            Sector la Vasija, K5
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Horarios -->
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="fw-bold mb-3">
+                        <i class="bi bi-clock-fill me-2"></i>
+                        Horarios de Atención
+                    </h6>
+                    <div class="schedule">
+                        <p class="mb-2 opacity-75">
+                            <i class="bi bi-calendar-week me-2" style="color: #6b8e23;"></i>
+                            <strong>Lunes a Viernes:</strong><br>
+                            <span class="ms-4">8:00 AM - 5:00 PM</span>
+                        </p>
+                        <p class="mb-0 opacity-75">
+                            <i class="bi bi-calendar-day me-2" style="color: #d4a574;"></i>
+                            <strong>Sábados:</strong><br>
+                            <span class="ms-4">8:00 AM - 3:00 PM</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Redes sociales -->
+                <div class="col-lg-2 col-md-6">
+                    <h6 class="fw-bold mb-3">
+                        <i class="bi bi-share-fill me-2"></i>
+                        Síguenos
+                    </h6>
+                    <div class="social-links d-flex flex-column gap-2">
+                        <a href="https://www.facebook.com/profile.php?id=100066757715498" 
+                           target="_blank" 
+                           class="text-white text-decoration-none d-flex align-items-center hover-social">
+                            <i class="bi bi-facebook me-2 fs-5"></i>
+                            Facebook
+                        </a>
+                        <a href="https://www.tiktok.com/@confiteriamarianita?_t=ZM-8ttYZp03fba&_r=1" 
+                           target="_blank" 
+                           class="text-white text-decoration-none d-flex align-items-center hover-social">
+                            <i class="bi bi-tiktok me-2 fs-5"></i>
+                            TikTok
+                        </a>
+                        <a href="https://api.whatsapp.com/send?phone=%2B593992470053" 
+                           target="_blank" 
+                           class="text-white text-decoration-none d-flex align-items-center hover-social">
+                            <i class="bi bi-whatsapp me-2 fs-5"></i>
+                            WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Línea divisoria -->
+            <hr class="my-4 opacity-25">
+
+            <!-- Copyright y enlaces adicionales -->
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0 opacity-75">
+                        © 2025 Aserradería Pequinez. Todos los derechos reservados.
+                    </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="footer-links">
+                        <a href="../../index.html" class="text-white text-decoration-none me-3 opacity-75 hover-link">
+                            <i class="bi bi-house-door me-1"></i>Inicio
+                        </a>
+                        <a href="#mision" class="text-white text-decoration-none me-3 opacity-75 hover-link">
+                            <i class="bi bi-bullseye me-1"></i>Misión
+                        </a>
+                        <a href="#vision" class="text-white text-decoration-none opacity-75 hover-link">
+                            <i class="bi bi-eye me-1"></i>Visión
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="../js/cargarImagen.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../js/index.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/modals.js"></script>
+    <script src="../js/quienessomos-professional.js"></script>
+    
+    <!-- Función de búsqueda para compatibilidad con header -->
+    <script>
+        function realizarBusqueda() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            if (query.trim() === '') {
+                alert('Por favor, ingresa un término de búsqueda');
+                return;
+            }
+            
+            // Buscar en el contenido de la página
+            const sections = document.querySelectorAll('section, .card-body, .hero-text');
+            let found = false;
+            
+            sections.forEach(section => {
+                if (section.textContent.toLowerCase().includes(query)) {
+                    section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    section.style.transition = 'background-color 0.5s ease';
+                    section.style.backgroundColor = 'rgba(107, 142, 35, 0.2)';
+                    setTimeout(() => {
+                        section.style.backgroundColor = '';
+                    }, 2000);
+                    found = true;
+                    return;
+                }
+            });
+            
+            if (!found) {
+                alert(`No se encontraron resultados para: "${query}"`);
+            }
+        }
+        
+        // Permitir búsqueda con Enter
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                realizarBusqueda();
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1359 @@
+/* Tema Forestal para Aserradería Pequinez */
+
+/* Variables de colores forestales */
+:root {
+    --forest-primary: #2d5016;
+    --forest-secondary: #4a7c59;
+    --forest-accent: #6b8e23;
+    --forest-light: #f8faf6;
+    --forest-brown: #8b4513;
+    --forest-gold: #daa520;
+    --forest-earth: #a0522d;
+    --forest-sage: #87a96b;
+}
+
+/* Sobrescribir colores principales */
+.header {
+    background: linear-gradient(135deg, var(--forest-primary) 0%, var(--forest-secondary) 50%, var(--forest-accent) 100%) !important;
+}
+
+.contenido-principal {
+    background: linear-gradient(135deg, var(--forest-light) 0%, #f4f8f0 100%) !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    min-height: calc(100vh - 120px) !important;
+    padding: 40px 20px 40px 60px !important; /* Más padding izquierdo, menos derecho */
+    gap: 20px !important;
+    position: relative;
+}
+
+.texto-principal h1 {
+    color: var(--forest-primary) !important;
+}
+
+.texto-principal h2 {
+    color: var(--forest-secondary) !important;
+}
+
+.btn-primario {
+    background: linear-gradient(135deg, var(--forest-secondary), var(--forest-accent)) !important;
+    box-shadow: 0 4px 15px rgba(74, 124, 89, 0.3) !important;
+}
+
+.btn-primario:hover {
+    background: linear-gradient(135deg, var(--forest-primary), var(--forest-secondary)) !important;
+    box-shadow: 0 6px 20px rgba(74, 124, 89, 0.4) !important;
+}
+
+.btn-secundario {
+    color: var(--forest-secondary) !important;
+    border-color: var(--forest-secondary) !important;
+}
+
+.btn-secundario:hover {
+    background: var(--forest-secondary) !important;
+    box-shadow: 0 4px 15px rgba(74, 124, 89, 0.3) !important;
+}
+
+/* Colores para los modales */
+.input-group {
+    border-color: var(--forest-secondary) !important;
+}
+
+.input-group ion-icon {
+    color: var(--forest-secondary) !important;
+}
+
+button {
+    background: linear-gradient(135deg, var(--forest-secondary), var(--forest-accent)) !important;
+}
+
+button:hover {
+    background: linear-gradient(135deg, var(--forest-primary), var(--forest-secondary)) !important;
+}
+
+button.cerrar {
+    background: transparent !important;
+    color: var(--forest-secondary) !important;
+}
+
+/* Iconos de contacto */
+.contacto-icon {
+    background-color: var(--forest-secondary) !important;
+}
+
+.social-icons-modal a {
+    background-color: var(--forest-secondary) !important;
+}
+
+.social-icons-modal a:hover {
+    background-color: var(--forest-primary) !important;
+}
+
+/* Colores de navegación */
+.nav a:hover {
+    color: var(--forest-sage) !important;
+}
+
+/* Elementos de información */
+.info h2:first-child {
+    color: var(--forest-secondary) !important;
+}
+
+.info h2 {
+    color: var(--forest-secondary) !important;
+}
+
+/* Opciones de registro */
+.opcion-icon {
+    background: var(--forest-secondary) !important;
+}
+
+.opcion-card:hover {
+    border-color: var(--forest-secondary) !important;
+    box-shadow: 0 8px 20px rgba(74, 124, 89, 0.15) !important;
+}
+
+.opcion-content h3 {
+    color: var(--forest-primary) !important;
+}
+
+.opcion-arrow {
+    color: var(--forest-secondary) !important;
+}
+
+/* Estilos para elementos decorativos */
+.floating-elements .float-element {
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Colores para badges */
+.badge.bg-light {
+    background-color: var(--forest-light) !important;
+    color: var(--forest-primary) !important;
+}
+
+/* Efectos hover para tarjetas */
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(74, 124, 89, 0.2) !important;
+}
+
+/* Gradientes personalizados */
+.bg-gradient-primary {
+    background: linear-gradient(135deg, var(--forest-primary) 0%, var(--forest-secondary) 50%, var(--forest-accent) 100%) !important;
+}
+
+/* Iconos de servicios */
+.bg-primary {
+    background: var(--forest-secondary) !important;
+}
+
+.bg-success {
+    background: var(--forest-accent) !important;
+}
+
+.bg-warning {
+    background: var(--forest-gold) !important;
+}
+
+.bg-info {
+    background: var(--forest-sage) !important;
+}
+
+.bg-danger {
+    background: var(--forest-brown) !important;
+}
+
+/* Borders personalizados */
+.border-primary {
+    border-color: var(--forest-secondary) !important;
+}
+
+.border-success {
+    border-color: var(--forest-accent) !important;
+}
+
+.border-warning {
+    border-color: var(--forest-gold) !important;
+}
+
+.border-info {
+    border-color: var(--forest-sage) !important;
+}
+
+/* Texto de colores */
+.text-primary {
+    color: var(--forest-primary) !important;
+}
+
+.text-success {
+    color: var(--forest-accent) !important;
+}
+
+.text-warning {
+    color: var(--forest-gold) !important;
+}
+
+.text-info {
+    color: var(--forest-sage) !important;
+}
+
+/* Efectos adicionales para tema forestal */
+
+/* Animación de hojas flotantes */
+.contenido-principal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><text y="50" font-size="30" opacity="0.1">🌿</text></svg>'),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150"><text y="75" font-size="40" opacity="0.08">🍃</text></svg>');
+    background-position: 10% 20%, 80% 70%;
+    background-repeat: no-repeat;
+    background-size: 80px 80px, 120px 120px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Sombras con tinte verde para elementos */
+.modal {
+    box-shadow: 0 25px 50px rgba(45, 80, 22, 0.3) !important;
+}
+
+.info, .info-registro, .info-contactos {
+    box-shadow: 0 8px 25px rgba(45, 80, 22, 0.2) !important;
+    border: 1px solid rgba(74, 124, 89, 0.1);
+}
+
+/* Efecto de hover mejorado para botones */
+.btn-primario, .btn-secundario, button {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primario::before, .btn-secundario::before, button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-primario:hover::before, .btn-secundario:hover::before, button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Barras de progreso con colores forestales */
+.progress-bar {
+    background: linear-gradient(90deg, var(--forest-secondary), var(--forest-accent)) !important;
+}
+
+/* Efecto de textura de madera sutil */
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 1px,
+            rgba(255, 255, 255, 0.03) 1px,
+            rgba(255, 255, 255, 0.03) 2px
+        );
+    pointer-events: none;
+}
+
+/* Estilos para el footer unificado */
+.footer {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a2e0a 0%, #2d5016 100%) !important;
+    border-top: 3px solid #4a7c59 !important;
+    color: white !important;
+}
+
+.footer::before {
+    content: '🌲🌿🍃';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    opacity: 0.6;
+    background: var(--forest-primary);
+    padding: 5px 15px;
+    border-radius: 20px;
+    z-index: 2;
+}
+
+.footer .container {
+    position: relative;
+    z-index: 3;
+}
+
+.social-icons a:hover {
+    color: var(--forest-sage) !important;
+    transform: scale(1.2);
+    transition: all 0.3s ease;
+}
+
+/* Efectos hover para enlaces del footer */
+.hover-social {
+    transition: all 0.3s ease;
+    opacity: 0.85;
+}
+
+.hover-social:hover {
+    opacity: 1;
+    color: var(--forest-gold) !important;
+    transform: translateX(5px);
+}
+
+.hover-link {
+    transition: all 0.3s ease;
+}
+
+.hover-link:hover {
+    color: var(--forest-gold) !important;
+    text-decoration: underline !important;
+    transform: translateY(-1px);
+}
+
+/* Estilos específicos para forzar colores forestales en el footer */
+.footer {
+    background: linear-gradient(135deg, #1a2e0a 0%, #2d5016 100%) !important;
+    border-top: 3px solid #4a7c59 !important;
+    color: white !important;
+}
+
+.footer * {
+    color: white !important;
+}
+
+.footer .bg-primary {
+    background-color: #4a7c59 !important;
+}
+
+.footer .bg-light {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.footer .text-primary {
+    color: #2d5016 !important;
+}
+
+/* Asegurar que los enlaces se mantengan blancos */
+.footer a {
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.footer a:hover {
+    color: #d4a574 !important;
+}
+
+/* Iconos específicos del footer */
+.footer .bi-phone, 
+.footer .bi-envelope, 
+.footer .bi-geo-alt {
+    color: #d4a574 !important;
+}
+
+.footer .bi-calendar-week, 
+.footer .bi-calendar-day {
+    color: #6b8e23 !important;
+}
+
+/* Badges del footer */
+.footer .badge {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    color: #2d5016 !important;
+}
+
+.footer .badge:hover {
+    background-color: white !important;
+    color: #2d5016 !important;
+}
+
+/* Línea divisoria */
+.footer hr {
+    border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Sobrescribir cualquier color azul de Bootstrap */
+.footer .text-white {
+    color: white !important;
+}
+
+.footer .opacity-75 {
+    opacity: 0.85 !important;
+}
+
+/* Redes sociales */
+.footer .social-links a {
+    color: white !important;
+    opacity: 0.85;
+    transition: all 0.3s ease;
+}
+
+.footer .social-links a:hover {
+    color: #d4a574 !important;
+    opacity: 1;
+    transform: translateX(5px);
+}
+
+/* Enlaces del footer */
+.footer .footer-links a {
+    color: white !important;
+    opacity: 0.85;
+    transition: all 0.3s ease;
+}
+
+.footer .footer-links a:hover {
+    color: #d4a574 !important;
+    opacity: 1;
+    text-decoration: underline !important;
+}
+
+/* Responsividad del footer */
+@media (max-width: 768px) {
+    .footer .col-lg-4, 
+    .footer .col-lg-3, 
+    .footer .col-lg-2 {
+        margin-bottom: 2rem;
+    }
+    
+    .footer .text-md-end {
+        text-align: center !important;
+    }
+    
+    .footer .footer-links {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+}
+
+/* Posicionamiento de la imagen del leñador más hacia la derecha */
+.imagen-derecha {
+    display: flex;
+    justify-content: flex-end !important;
+    align-items: center;
+    padding-right: 2rem !important;
+    margin-left: auto !important;
+}
+
+.imagen-derecha img {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    transform: translateX(20px) !important;
+    max-width: 350px !important;
+    height: auto;
+}
+
+/* Optimización del contenedor principal para mover la imagen más a la derecha */
+.contenido-principal {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    min-height: calc(100vh - 120px) !important;
+    padding: 40px 20px 40px 60px !important; /* Más padding izquierdo, menos derecho */
+    gap: 20px !important;
+    position: relative;
+}
+
+.contenido-izquierda {
+    flex: 0 0 50% !important; /* Ocupa menos espacio */
+    max-width: 500px !important;
+}
+
+/* Imagen del leñador posicionada muy a la derecha */
+.contenido-principal .imagen-derecha {
+    flex: 0 0 auto !important;
+    position: absolute !important;
+    right: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) translateX(-10px) !important;
+    z-index: 10;
+    width: auto !important;
+}
+
+.contenido-principal .imagen-derecha img {
+    max-width: 420px !important;
+    height: auto !important;
+    margin: 0 !important;
+}
+
+/* Responsividad para la imagen del leñador */
+@media (max-width: 1200px) {
+    .contenido-principal .imagen-derecha {
+        right: -20px !important;
+    }
+    
+    .contenido-principal .imagen-derecha img {
+        max-width: 350px !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .contenido-principal .imagen-derecha {
+        position: relative !important;
+        right: auto !important;
+        top: auto !important;
+        transform: none !important;
+        flex: 1 !important;
+        text-align: right !important;
+    }
+    
+    .contenido-principal .imagen-derecha img {
+        max-width: 300px !important;
+    }
+}
+
+/* Para tablets y pantallas medianas */
+@media (max-width: 768px) {
+    .imagen-derecha {
+        padding-right: 1rem !important;
+        justify-content: center !important;
+    }
+    
+    .imagen-derecha img {
+        transform: translateX(0) !important;
+        max-width: 280px !important;
+    }
+}
+
+/* =======================
+   MODAL LOGIN MINIMALIST FOREST THEME 
+   ======================= */
+
+/* Modal backdrop with subtle forest feel */
+.modal::backdrop {
+  background: rgba(45, 80, 22, 0.8) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+/* Modal container - clean and minimalist */
+.info {
+  background: #ffffff !important;
+  border: 1px solid rgba(74, 124, 89, 0.2) !important;
+  box-shadow: 0 20px 60px rgba(45, 80, 22, 0.15) !important;
+  border-radius: 16px !important;
+  padding: 40px !important;
+  max-width: 400px !important;
+  width: 90vw !important;
+  max-height: 90vh !important;
+  overflow-y: auto !important;
+  position: relative !important;
+  backdrop-filter: blur(10px) !important;
+  margin: 0 !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;
+}
+
+/* Remove decorative elements for minimalist approach */
+.info::before,
+.info::after {
+  display: none !important;
+}
+
+/* Clean header styling */
+.info h2:first-child {
+  color: #2d5016 !important;
+  font-weight: 700 !important;
+  font-size: 24px !important;
+  text-align: center !important;
+  margin-bottom: 8px !important;
+  line-height: 1.3 !important;
+}
+
+.info h2 {
+  color: #4a7c59 !important;
+  font-weight: 500 !important;
+  font-size: 18px !important;
+  text-align: center !important;
+  margin: 20px 0 30px 0 !important;
+}
+
+/* Minimalist horizontal rule */
+hr {
+  border: none !important;
+  height: 1px !important;
+  background: linear-gradient(90deg, transparent, #4a7c59, transparent) !important;
+  margin: 20px 0 !important;
+  opacity: 0.3 !important;
+}
+
+/* Clean input styling */
+.input-group {
+  border: 1px solid #e0e7e0 !important;
+  background: #fafbfa !important;
+  border-radius: 12px !important;
+  padding: 16px 20px !important;
+  margin: 16px 0 !important;
+  transition: all 0.3s ease !important;
+  box-shadow: none !important;
+}
+
+.input-group:focus-within {
+  border-color: #4a7c59 !important;
+  background: #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.1) !important;
+}
+
+.input-group ion-icon {
+  color: #4a7c59 !important;
+  font-size: 20px !important;
+  margin-right: 12px !important;
+  opacity: 0.7 !important;
+}
+
+.input-group:focus-within ion-icon {
+  opacity: 1 !important;
+}
+
+.input-group input {
+  font-size: 16px !important;
+  color: #2d5016 !important;
+  font-weight: 400 !important;
+}
+
+.input-group input::placeholder {
+  color: #8a9a8a !important;
+  font-weight: 400 !important;
+}
+
+/* Clean button styling */
+.botones {
+  margin: 30px 0 20px 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+}
+
+.info button:not(.cerrar) {
+  background: #4a7c59 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 12px !important;
+  padding: 16px 24px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 12px rgba(74, 124, 89, 0.2) !important;
+  cursor: pointer !important;
+}
+
+.info button:not(.cerrar):hover {
+  background: #3a5a40 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(74, 124, 89, 0.3) !important;
+}
+
+.info button:not(.cerrar):active {
+  transform: translateY(0) !important;
+}
+
+/* Secondary button styling */
+.info button:not(.cerrar):nth-child(2) {
+  background: transparent !important;
+  color: #4a7c59 !important;
+  border: 1px solid #4a7c59 !important;
+  box-shadow: none !important;
+}
+
+.info button:not(.cerrar):nth-child(2):hover {
+  background: #4a7c59 !important;
+  color: white !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(74, 124, 89, 0.2) !important;
+}
+
+/* Minimalist close button */
+.info button.cerrar {
+  background: transparent !important;
+  color: #8a9a8a !important;
+  border: none !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  padding: 8px !important;
+  margin-top: 10px !important;
+  transition: color 0.3s ease !important;
+  cursor: pointer !important;
+}
+
+.info button.cerrar:hover {
+  color: #4a7c59 !important;
+}
+
+/* Clean security text */
+.info p {
+  color: #8a9a8a !important;
+  font-size: 13px !important;
+  text-align: center !important;
+  margin: 20px 0 10px 0 !important;
+  line-height: 1.4 !important;
+}
+
+/* Remove line breaks for cleaner spacing */
+.info br {
+  display: none !important;
+}
+
+/* ===========================
+   REGISTRO MODAL FOREST THEME 
+   =========================== */
+
+/* Registration modal styles */
+.info-registro {
+  background: linear-gradient(135deg, #f8faf6 0%, #e8f4e0 100%) !important;
+  border: 2px solid #4a7c59 !important;
+  box-shadow: 0 8px 25px rgba(45, 80, 22, 0.3) !important;
+}
+
+.info-registro h2 {
+  color: #2d5016 !important;
+  font-weight: 600 !important;
+}
+
+/* ==============================
+   REGISTRATION MODAL OPTION CARDS
+   ============================== */
+
+/* Option cards with forest theme */
+.opcion-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8faf6 100%) !important;
+  border: 2px solid #4a7c59 !important;
+  border-radius: 15px !important;
+  padding: 20px !important;
+  margin: 10px 0 !important;
+  transition: all 0.3s ease !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 12px rgba(45, 80, 22, 0.1) !important;
+}
+
+.opcion-card:hover {
+  border-color: #6b8e23 !important;
+  box-shadow: 0 6px 16px rgba(45, 80, 22, 0.2) !important;
+  transform: translateY(-2px) !important;
+  background: linear-gradient(135deg, #f8faf6 0%, #e8f4e0 100%) !important;
+}
+
+.opcion-card .opcion-icon {
+  color: #4a7c59 !important;
+  margin-bottom: 10px !important;
+}
+
+.opcion-card .opcion-icon ion-icon {
+  font-size: 2.5em !important;
+  color: #4a7c59 !important;
+}
+
+.opcion-card h3 {
+  color: #2d5016 !important;
+  font-weight: 600 !important;
+  margin-bottom: 8px !important;
+}
+
+.opcion-card p {
+  color: #3a5a40 !important;
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+}
+
+.opcion-card .opcion-arrow ion-icon {
+  color: #6b8e23 !important;
+  font-size: 1.5em !important;
+}
+
+/* Registration modal container */
+.info-registro {
+  background: linear-gradient(135deg, #f8faf6 0%, #e8f4e0 100%) !important;
+  border: 2px solid #4a7c59 !important;
+  box-shadow: 0 8px 25px rgba(45, 80, 22, 0.3) !important;
+  padding: 40px 30px !important;
+  border-radius: 20px !important;
+  max-width: 500px !important;
+  position: relative !important;
+}
+
+.info-registro::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  width: 20px;
+  height: 20px;
+  background: #6b8e23;
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: forestPulse 3s ease-in-out infinite;
+}
+
+.info-registro::after {
+  content: '🌿';
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.info-registro h2 {
+  color: #2d5016 !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+  margin-bottom: 20px !important;
+  text-shadow: 0 1px 2px rgba(45, 80, 22, 0.1) !important;
+}
+
+.info-registro button.cerrar {
+  color: #4a7c59 !important;
+  background: transparent !important;
+  border: none !important;
+  font-weight: bold !important;
+  text-decoration: underline !important;
+  transition: color 0.3s ease !important;
+  margin-top: 20px !important;
+}
+
+.info-registro button.cerrar:hover {
+  color: #2d5016 !important;
+}
+
+/* Registration options container */
+.registro-opciones {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 15px !important;
+  margin: 20px 0 !important;
+}
+
+/* Animation for forest elements */
+@keyframes forestPulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.1);
+  }
+}
+
+/* ============================
+   CATALOG AND CONTACT MODALS
+   ============================ */
+
+/* Contact/catalog modal containers */
+.info-contactos {
+  background: linear-gradient(135deg, #f8faf6 0%, #e8f4e0 100%) !important;
+  border: 2px solid #4a7c59 !important;
+  box-shadow: 0 8px 25px rgba(45, 80, 22, 0.3) !important;
+  padding: 40px 30px !important;
+  border-radius: 20px !important;
+  max-width: 500px !important;
+  position: relative !important;
+}
+
+.info-contactos::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  width: 20px;
+  height: 20px;
+  background: #6b8e23;
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: forestPulse 3s ease-in-out infinite;
+}
+
+.info-contactos::after {
+  content: '🌿';
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.info-contactos h2 {
+  color: #2d5016 !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+  margin-bottom: 20px !important;
+  text-shadow: 0 1px 2px rgba(45, 80, 22, 0.1) !important;
+}
+
+.info-contactos h3 {
+  color: #2d5016 !important;
+  font-weight: 600 !important;
+}
+
+.info-contactos p {
+  color: #3a5a40 !important;
+}
+
+.info-contactos button.cerrar {
+  color: #4a7c59 !important;
+  background: transparent !important;
+  border: none !important;
+  font-weight: bold !important;
+  text-decoration: underline !important;
+  transition: color 0.3s ease !important;
+  margin-top: 20px !important;
+}
+
+.info-contactos button.cerrar:hover {
+  color: #2d5016 !important;
+}
+
+/* Contact items styling */
+.contacto-item {
+  background: linear-gradient(135deg, #ffffff 0%, #f8faf6 100%) !important;
+  border: 2px solid #4a7c59 !important;
+  border-radius: 12px !important;
+  padding: 15px !important;
+  margin: 10px 0 !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 2px 8px rgba(45, 80, 22, 0.1) !important;
+}
+
+.contacto-item:hover {
+  border-color: #6b8e23 !important;
+  box-shadow: 0 4px 12px rgba(45, 80, 22, 0.2) !important;
+  transform: translateY(-1px) !important;
+}
+
+.contacto-icon {
+  color: #4a7c59 !important;
+}
+
+.contacto-icon ion-icon {
+  color: #4a7c59 !important;
+  font-size: 2em !important;
+}
+
+.contacto-detalle h3 {
+  color: #2d5016 !important;
+  font-weight: 600 !important;
+}
+
+.contacto-detalle p {
+  color: #3a5a40 !important;
+  font-size: 14px !important;
+}
+
+.contacto-detalle strong {
+  color: #2d5016 !important;
+}
+
+/* ========================================
+   OVERRIDE ORIGINAL MODAL STYLES FOR PROPER CENTERING
+   ======================================== */
+
+/* Force proper modal positioning */
+.modal {
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  max-width: none !important;
+  max-height: none !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;
+  margin: 0 !important;
+}
+
+/* Ensure backdrop covers full screen */
+.modal::backdrop {
+  background: rgba(45, 80, 22, 0.8) !important;
+  backdrop-filter: blur(8px) !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+}
+
+/* Override any conflicting positioning */
+.modal.debug-open .info {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;
+  margin: 0 auto !important;
+}
+
+/* Ensure proper flexbox centering */
+.modal[open],
+.modal.debug-open {
+  align-items: center !important;
+  justify-content: center !important;
+  display: flex !important;
+}
+
+/* ================================
+   MODAL RESPONSIVE & MOBILE DESIGN
+   ================================ */
+
+@media (max-width: 480px) {
+  .info {
+    margin: 20px !important;
+    padding: 30px 25px !important;
+    max-width: calc(100vw - 40px) !important;
+  }
+  
+  .info h2:first-child {
+    font-size: 20px !important;
+  }
+  
+  .info h2 {
+    font-size: 16px !important;
+  }
+  
+  .input-group {
+    padding: 14px 18px !important;
+  }
+  
+  .info button:not(.cerrar) {
+    padding: 14px 20px !important;
+    font-size: 15px !important;
+  }
+}
+
+/* ==============================
+   ADDITIONAL MINIMALIST TOUCHES
+   ============================== */
+
+/* Smooth modal appearance animation */
+.modal[open] .info {
+  animation: modalSlideUp 0.3s ease-out;
+}
+
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Focus states for accessibility */
+.input-group input:focus {
+  outline: none !important;
+}
+
+.info button:focus {
+  outline: 2px solid #4a7c59 !important;
+  outline-offset: 2px !important;
+}
+
+/* Subtle loading state for buttons */
+.info button:not(.cerrar):disabled {
+  opacity: 0.7 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+/* Clean typography hierarchy */
+.info h2:first-child {
+  letter-spacing: -0.02em !important;
+}
+
+.info h2 {
+  letter-spacing: -0.01em !important;
+}
+
+/* ============================
+   MODAL DEBUGGING & FALLBACK
+   ============================ */
+
+/* Ensure modal is visible when opened */
+.modal[open],
+.modal[style*="display: flex"] {
+  display: flex !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 9999 !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(45, 80, 22, 0.8) !important;
+}
+
+/* Force modal visibility for debugging */
+.modal.debug-open {
+  display: flex !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: rgba(45, 80, 22, 0.8) !important;
+  z-index: 9999 !important;
+  align-items: center !important;
+  justify-content: center !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+/* Make sure modal content is visible and centered */
+.modal .info {
+  position: relative !important;
+  z-index: 10000 !important;
+  margin: auto !important;
+  transform: none !important;
+}
+
+/* ========================================
+   ESTILOS PARA MODAL DE SELECCIÓN DE USUARIO
+   ======================================== */
+
+/* Estilos para modal de selección de usuario */
+.info-seleccion {
+  background: #ffffff !important;
+  border: 1px solid rgba(74, 124, 89, 0.2) !important;
+  box-shadow: 0 20px 60px rgba(45, 80, 22, 0.15) !important;
+  border-radius: 16px !important;
+  padding: 40px !important;
+  max-width: 500px !important;
+  width: 90vw !important;
+  max-height: 90vh !important;
+  overflow-y: auto !important;
+  position: relative !important;
+  backdrop-filter: blur(10px) !important;
+  margin: 0 !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;
+}
+
+.info-seleccion h2 {
+  color: #2d5016 !important;
+  font-weight: 700 !important;
+  font-size: 24px !important;
+  text-align: center !important;
+  margin-bottom: 8px !important;
+  line-height: 1.3 !important;
+}
+
+.info-seleccion h3 {
+  color: #4a7c59 !important;
+  font-weight: 500 !important;
+  font-size: 18px !important;
+  text-align: center !important;
+  margin: 20px 0 30px 0 !important;
+}
+
+/* Contenedor de opciones de login */
+.opciones-login {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 16px !important;
+  margin: 24px 0 !important;
+}
+
+/* Tarjetas de opciones */
+.opciones-login .opcion-card {
+  display: flex !important;
+  align-items: center !important;
+  padding: 20px !important;
+  border: 2px solid #e0e7e0 !important;
+  border-radius: 12px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  background: linear-gradient(135deg, #ffffff 0%, #f8faf6 100%) !important;
+  box-shadow: 0 2px 8px rgba(74, 124, 89, 0.05) !important;
+}
+
+.opciones-login .opcion-card:hover {
+  border-color: #4a7c59 !important;
+  background: linear-gradient(135deg, #f8faf6 0%, #e8f4e0 100%) !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 20px rgba(74, 124, 89, 0.15) !important;
+}
+
+/* Iconos de las opciones */
+.opciones-login .opcion-icon {
+  background: linear-gradient(135deg, #4a7c59, #6b8e23) !important;
+  color: white !important;
+  width: 60px !important;
+  height: 60px !important;
+  border-radius: 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-right: 16px !important;
+  font-size: 24px !important;
+  box-shadow: 0 4px 12px rgba(74, 124, 89, 0.2) !important;
+}
+
+.opciones-login .opcion-icon ion-icon {
+  font-size: 28px !important;
+}
+
+/* Contenido de las opciones */
+.opciones-login .opcion-content {
+  flex: 1 !important;
+}
+
+.opciones-login .opcion-content h3 {
+  margin: 0 0 8px 0 !important;
+  color: #2d5016 !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  text-align: left !important;
+}
+
+.opciones-login .opcion-content p {
+  margin: 0 !important;
+  color: #666 !important;
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+}
+
+/* Flecha de las opciones */
+.opciones-login .opcion-arrow {
+  color: #4a7c59 !important;
+  font-size: 20px !important;
+  margin-left: 16px !important;
+  transition: transform 0.3s ease !important;
+}
+
+.opciones-login .opcion-card:hover .opcion-arrow {
+  transform: translateX(4px) !important;
+}
+
+/* Botón cerrar del modal de selección */
+.info-seleccion button.cerrar {
+  background: transparent !important;
+  color: #8a9a8a !important;
+  border: none !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  padding: 8px !important;
+  margin-top: 20px !important;
+  transition: color 0.3s ease !important;
+  cursor: pointer !important;
+  width: 100% !important;
+  text-align: center !important;
+}
+
+.info-seleccion button.cerrar:hover {
+  color: #4a7c59 !important;
+}
+
+/* =====================================
+   ESTILOS ESPECÍFICOS PARA ADMIN MODAL
+   ===================================== */
+
+/* Modal de administrador con tema marrón */
+#modalLoginAdmin .info h2 {
+  color: #8b4513 !important;
+}
+
+#modalLoginAdmin .info h3 {
+  color: #a0522d !important;
+}
+
+#modalLoginAdmin .input-group {
+  border-color: #cd853f !important;
+}
+
+#modalLoginAdmin .input-group:focus-within {
+  border-color: #8b4513 !important;
+  box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1) !important;
+}
+
+#modalLoginAdmin .input-group ion-icon {
+  color: #8b4513 !important;
+}
+
+#modalLoginAdmin .input-group:focus-within ion-icon {
+  color: #8b4513 !important;
+}
+
+#modalLoginAdmin .botones button:not(.cerrar) {
+  background: linear-gradient(135deg, #8b4513, #a0522d) !important;
+  color: white !important;
+}
+
+#modalLoginAdmin .botones button:not(.cerrar):hover {
+  background: linear-gradient(135deg, #654321, #8b4513) !important;
+}
+
+#modalLoginAdmin button.cerrar {
+  color: #8b4513 !important;
+}
+
+#modalLoginAdmin button.cerrar:hover {
+  color: #654321 !important;
+}
+
+/* Icono específico para admin */
+.opciones-login .opcion-card:last-child .opcion-icon {
+  background: linear-gradient(135deg, #8b4513, #a0522d) !important;
+}
+
+/* =============================
+   RESPONSIVE PARA NUEVOS MODALES
+   ============================= */
+
+@media (max-width: 480px) {
+  .info-seleccion {
+    margin: 20px !important;
+    padding: 30px 25px !important;
+    max-width: calc(100vw - 40px) !important;
+  }
+  
+  .opciones-login .opcion-card {
+    padding: 16px !important;
+    flex-direction: column !important;
+    text-align: center !important;
+  }
+  
+  .opciones-login .opcion-icon {
+    margin-right: 0 !important;
+    margin-bottom: 12px !important;
+  }
+  
+  .opciones-login .opcion-arrow {
+    margin-left: 0 !important;
+    margin-top: 8px !important;
+  }
+}
