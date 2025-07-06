@@ -565,3 +565,78 @@ html, body {
         font-size: 0.8rem;
     }
 }
+
+/* Estilos para mensaje de éxito */
+.success-message {
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+    animation: slideIn 0.3s ease-out;
+}
+
+.success-message i {
+    font-size: 1.2rem;
+}
+
+.success-message span {
+    flex: 1;
+}
+
+/* Mejorar estilos de los checkboxes */
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #27ae60;
+    cursor: pointer;
+}
+
+.checkbox-group label {
+    font-size: 0.9rem;
+    color: #666;
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkbox-group label a {
+    color: #27ae60;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.checkbox-group label a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos adicionales para el formulario de opciones */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.forgot-password {
+    color: #27ae60;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
