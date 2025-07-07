@@ -56,6 +56,38 @@
             }
         }
     </script>
+    
+    <!-- Estilos para footer sticky -->
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Asegurar que el contenido principal ocupe el espacio disponible */
+        .admin-main {
+            flex: 1;
+            min-height: calc(100vh - 200px);
+        }
+        
+        /* Footer siempre al final */
+        footer {
+            margin-top: auto;
+        }
+    </style>
 </head>
 <body>
 

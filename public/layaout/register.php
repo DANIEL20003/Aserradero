@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aserradero - Registrarse</title>
-    <link rel="stylesheet" href="../css/Loging.css">
+    <link rel="stylesheet" href="../css/auth.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="login-container">
-        <div class="login-form">
-            <div class="login-header">
+    <div class="auth-container">
+        <div class="auth-form">
+            <div class="auth-header">
                 <div class="logo-container">
                     <i class="fas fa-tree"></i>
                     <h1>Aserradero</h1>
@@ -28,15 +28,14 @@
                     </div>
                 </div>
 
-
-                 <div class="form-group">
-                    <label for="email"></label>
+                <div class="form-group">
+                    <label for="cedula">Cédula</label>
                     <div class="input-container">
-                        <i class="fas fa-envelope"></i>
-                        <input type="email" id="email" name="email" required placeholder="tu@email.com">
+                        <i class="fas fa-id-card"></i>
+                        <input type="text" id="cedula" name="cedula" required placeholder="Número de cédula">
                     </div>
+                </div>
 
-                </div> 
                 <div class="form-group">
                     <label for="email">Correo Electrónico</label>
                     <div class="input-container">
@@ -74,32 +73,36 @@
                     </div>
                 </div>
 
-                <button type="submit" class="login-btn">
+                <button type="submit" class="auth-btn">
                     <i class="fas fa-user-plus"></i>
                     Registrarse
                 </button>
 
-                <div class="register-section">
+                <div class="nav-section">
                     <p>¿Ya tienes cuenta?</p>
-                    <a href="Login.php" class="register-btn">
+                    <a href="Login.php" class="nav-btn">
                         <i class="fas fa-sign-in-alt"></i>
                         Iniciar Sesión
                     </a>
                 </div>
             </form>
 
-            <div class="error-message" id="errorMessage" style="display: none;">
+            <div class="error-message message" id="errorMessage" style="display: none;">
                 <i class="fas fa-exclamation-triangle"></i>
                 <span id="errorText"></span>
             </div>
 
-            <div class="success-message" id="successMessage" style="display: none;">
+            <div class="success-message message" id="successMessage" style="display: none;">
                 <i class="fas fa-check-circle"></i>
                 <span id="successText"></span>
             </div>
         </div>
 
-        <div class="login-background">
+        <div class="auth-background">
+            <div class="background-content">
+                <h3>¡Únete a nosotros!</h3>
+                <p>Crea tu cuenta y forma parte de nuestra comunidad del aserradero. Gestiona tus proyectos de manera eficiente.</p>
+            </div>
             <div class="wood-pattern"></div>
             <div class="overlay"></div>
         </div>
@@ -124,15 +127,31 @@
         // Validación del formulario
         document.getElementById('registerForm').addEventListener('submit', function(e) {
             const nombre = document.getElementById('nombre').value.trim();
+            const cedula = document.getElementById('cedula').value.trim();
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirm_password').value;
             const terms = document.getElementById('terms').checked;
             
             // Validar campos vacíos
-            if (!nombre || !email || !password || !confirmPassword) {
+            if (!nombre || !cedula || !email || !password || !confirmPassword) {
                 e.preventDefault();
                 showError('Por favor, complete todos los campos');
+                return;
+            }
+            
+            // Validar formato de cédula (solo números)
+            const cedulaRegex = /^[0-9]+$/;
+            if (!cedulaRegex.test(cedula)) {
+                e.preventDefault();
+                showError('La cédula debe contener solo números');
+                return;
+            }
+            
+            // Validar longitud de cédula
+            if (cedula.length < 7 || cedula.length > 10) {
+                e.preventDefault();
+                showError('La cédula debe tener entre 7 y 10 dígitos');
                 return;
             }
             

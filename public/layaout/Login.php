@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aserradero - Iniciar Sesión</title>
-    <link rel="stylesheet" href="../css/Loging.css">
+    <link rel="stylesheet" href="../css/auth.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="login-container">
-        <div class="login-form">
-            <div class="login-header">
+    <div class="auth-container">
+        <div class="auth-form">
+            <div class="auth-header">
                 <div class="logo-container">
                     <i class="fas fa-tree"></i>
                     <h1>Aserradero</h1>
@@ -39,29 +39,37 @@
                     </div>
                 </div>
 
-                
+                <div class="form-options">
+                    <div class="forgot-password">
+                        <a href="forgot-password.php">¿Olvidaste tu contraseña?</a>
+                    </div>
+                </div>
 
-                <button type="submit" class="login-btn">
+                <button type="submit" class="auth-btn">
                     <i class="fas fa-sign-in-alt"></i>
                     Iniciar Sesión
                 </button>
 
-                <div class="register-section">
+                <div class="nav-section">
                     <p>¿No tienes cuenta?</p>
-                    <a href="register.php" class="register-btn">
+                    <a href="register.php" class="nav-btn">
                         <i class="fas fa-user-plus"></i>
                         Registrarse
                     </a>
                 </div>
             </form>
 
-            <div class="error-message" id="errorMessage" style="display: none;">
+            <div class="error-message message" id="errorMessage" style="display: none;">
                 <i class="fas fa-exclamation-triangle"></i>
                 <span id="errorText"></span>
             </div>
         </div>
 
-        <div class="login-background">
+        <div class="auth-background">
+            <div class="background-content">
+                <h3>¡Bienvenido de vuelta!</h3>
+                <p>Inicia sesión para acceder a todas las funcionalidades de nuestro sistema de gestión del aserradero.</p>
+            </div>
             <div class="wood-pattern"></div>
             <div class="overlay"></div>
         </div>
