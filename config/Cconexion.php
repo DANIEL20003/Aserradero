@@ -1,8 +1,11 @@
 <?php
-$conexion = mysqli_connect(hostname: 'localhost',
-                            username: 'root',
-                            password: '',
-                            database: 'aserraderodp');
+
+require "clavebasededatos.php";
+
+$conexion = mysqli_connect(hostname: $hostname,
+                            username: $username,
+                            password: $password,
+                            database: $database);
 
 
 ?>

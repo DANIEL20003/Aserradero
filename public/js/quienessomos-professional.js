@@ -1,6 +1,5 @@
 // JavaScript profesional para la página Quiénes Somos
 
-document.addEventListener('DOMContentLoaded', function() {
     // Configuración de animaciones al scroll
     const observerOptions = {
         threshold: 0.1,
@@ -106,25 +105,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Lazy loading para imágenes
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    if (img.dataset.src) {
-                        img.src = img.dataset.src;
-                        img.classList.remove('lazy');
-                        imageObserver.unobserve(img);
-                    }
-                }
-            });
-        });
-
-        document.querySelectorAll('img[data-src]').forEach(img => {
-            imageObserver.observe(img);
-        });
-    }
 
     // Agregar efectos hover mejorados a las cards
     document.querySelectorAll('.valor-card').forEach(card => {
@@ -189,7 +169,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 10);
 
     window.addEventListener('scroll', debouncedScroll);
-});
 
 // Función para animar elementos cuando entran en viewport
 function animateOnScroll() {
