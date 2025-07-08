@@ -10,17 +10,17 @@ if (session_status() == PHP_SESSION_NONE) {
 
 include('./config/Cconexion.php');
 
-// Consulta para obtener categorías activas
-$sql_consulta = "SELECT * FROM Categorias WHERE activo = 1";
+// Consulta para obtener clientes/usuarios activos
+$sql_consulta = "SELECT * FROM Usuarios WHERE activo = 1";
 $result = mysqli_query($conexion, $sql_consulta);
 
 if($result) {
-    $categorias = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $clientes = mysqli_fetch_all($result, MYSQLI_ASSOC);
     
     // Convertir encoding si es necesario
-    if (!empty($categorias)) {
-        foreach ($categorias as &$categoria) {
-            foreach ($categoria as $key => &$value) {
+    if (!empty($clientes)) {
+        foreach ($clientes as &$cliente) {
+            foreach ($cliente as $key => &$value) {
                 if (is_string($value)) {
                     $value = mb_convert_encoding($value, 'UTF-8', 'auto');
                 }
@@ -28,11 +28,11 @@ if($result) {
         }
     }
     
-    // Guardar categorías en sesión
-    $_SESSION['categorias'] = $categorias;
+    // Guardar clientes en sesión
+    $_SESSION['clientes'] = $clientes;
     
 } else {
-    echo "<script>alert('Error al obtener la lista de categorías: " . mysqli_error($conexion) . "'); 
+    echo "<script>alert('Error al obtener la lista de clientes: " . mysqli_error($conexion) . "'); 
             window.location.href = '../index.php?opc=dashboard';</script>";
     exit;
 }

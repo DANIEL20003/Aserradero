@@ -1,13 +1,27 @@
 <?php
+// Obtener el ID de la categoría a editar
+$id_categoria = $_GET['id'];
+
+// Incluir conexión y obtener los datos de la categoría
+include_once './config/Cconexion.php';
+$sql = "SELECT * FROM Categorias WHERE id_categoria = $id_categoria AND activo = 1";
+$resultado = mysqli_query($conexion, $sql);
+$categoria = mysqli_fetch_assoc($resultado);
+
+if (!$categoria) {
+    echo "<script>alert('Categoría no encontrada.'); window.location.href = 'index.php?opc=listar_categorias';</script>";
+    exit;
+}
+
 // Configuración de la página
-$page_title = "Agregar Categoría";
-$page_subtitle = "Crea una nueva categoría para productos";
-$page_icon = "fas fa-plus";
+$page_title = "Editar Categoría";
+$page_subtitle = "Actualiza la información de la categoría";
+$page_icon = "fas fa-edit";
 
 // Breadcrumbs
 $breadcrumbs = [
     ['title' => 'Categorías', 'url' => 'index.php?opc=listar_categorias'],
-    ['title' => 'Agregar Categoría', 'active' => true]
+    ['title' => 'Editar Categoría', 'active' => true]
 ];
 
 // Acciones del header
@@ -28,11 +42,11 @@ include './view/V_Header_Admin.php';
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h3 class="mb-1">
-                <i class="fas fa-plus text-success"></i>
-                Nueva Categoría
+                <i class="fas fa-edit text-warning"></i>
+                Editar Categoría
             </h3>
             <p class="text-muted mb-0">
-                Completa la información para crear una nueva categoría
+                Categoría ID: <strong><?php echo htmlspecialchars($categoria['id_categoria']); ?></strong>
             </p>
         </div>
         <div class="action-buttons">
@@ -43,7 +57,9 @@ include './view/V_Header_Admin.php';
         </div>
     </div>
 
-    <form action="./model/M_AgregarCategoria.php" method="POST" class="form-modern">
+    <form action="./model/M_EditarCategoria.php" method="POST" class="form-modern">
+        <input type="hidden" name="id_categoria" value="<?php echo $categoria['id_categoria']; ?>">
+        
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="form-group">
@@ -55,6 +71,7 @@ include './view/V_Header_Admin.php';
                            id="nombre" 
                            name="nombre" 
                            class="form-control" 
+                           value="<?php echo htmlspecialchars($categoria['descripcion']); ?>" 
                            required
                            placeholder="Ej: Maderas Duras, Herramientas, etc."
                            maxlength="100">
@@ -66,7 +83,7 @@ include './view/V_Header_Admin.php';
                 <div class="form-actions text-center mt-4">
                     <button type="submit" class="btn-action btn-success-custom me-3">
                         <i class="fas fa-save"></i>
-                        Agregar Categoría
+                        Actualizar Categoría
                     </button>
                     <a href="index.php?opc=listar_categorias" class="btn-action btn-secondary-custom">
                         <i class="fas fa-times"></i>
@@ -93,6 +110,7 @@ document.querySelector('.form-modern').addEventListener('submit', function(e) {
 // Auto-focus en el campo de nombre
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('nombre').focus();
+    document.getElementById('nombre').select();
 });
 </script>
 

@@ -7,44 +7,71 @@ require_once '../config/Cconexion.php'; // AQUI LLAMO A MI ARCHIVO DE CONEXION A
 
 session_start();
 
-$email = $_POST['email'];
+$email = trim($_POST['email']);
 $clave = $_POST['password'];
 
-if($email == "" || $clave == ""){
-    echo "Por favor, ingrese su correo y contraseña.";
-    return;
+if(empty($email) || empty($clave)){
+    header("Location: ../index.php?opc=login&error=empty_fields");
+    exit;
 }
 
-$sql = "SELECT * FROM Usuarios WHERE correo = '$email' AND clave = '$clave'";
-$resultado = mysqli_query($conexion, $sql);
+// Usar prepared statement para evitar inyección SQL
+$sql = "SELECT * FROM Usuarios WHERE correo = ? AND activo = 1";
+$stmt = mysqli_prepare($conexion, $sql);
+
+if (!$stmt) {
+    header("Location: ../index.php?opc=login&error=database");
+    exit;
+}
+
+mysqli_stmt_bind_param($stmt, "s", $email);
+mysqli_stmt_execute($stmt);
+$resultado = mysqli_stmt_get_result($stmt);
 
 if(!$resultado) {
-    echo "Error en la consulta: " . mysqli_error($conexion);
+    header("Location: ../index.php?opc=login&error=database");
     exit;
 }
 
 if(mysqli_num_rows($resultado) > 0) {
-
-    $_SESSION['sesion_iniciada'] = "iniciado";
-    // nombre
     $fila = mysqli_fetch_assoc($resultado);
-	
-    $_SESSION['id_usuario'] = $fila['id_usuario'];
-    $_SESSION['nombre'] = $fila['nombre'];
-    $_SESSION['correo'] = $fila['correo'];
-    $_SESSION['esAdmin'] = $fila['id_usuario'] == 1 ? true : false;
+    
+    // Verificar la contraseña hasheada
+    if (password_verify($clave, $fila['clave'])) {
+        $_SESSION['sesion_iniciada'] = "iniciado";
+        $_SESSION['id_usuario'] = $fila['id_usuario'];
+        $_SESSION['nombre'] = $fila['nombre'];
+        $_SESSION['correo'] = $fila['correo'];
+        $_SESSION['esAdmin'] = $fila['id_usuario'] == 1 ? true : false;
 
-    if(isset($_SESSION['vienecarrito']) && $_SESSION['vienecarrito'] == true){
-        $_SESSION['vienecarrito'] = false;
-        header("Location: ../index.php?opc=pedido");
+        // Verificar si hay redirección desde el formulario
+        if (isset($_POST['redirect_after_login']) && !empty($_POST['redirect_after_login'])) {
+            $redirect = $_POST['redirect_after_login'];
+            header("Location: ../index.php?opc=$redirect");
+            exit();
+        }
+
+        if(isset($_SESSION['vienecarrito']) && $_SESSION['vienecarrito'] == true){
+            $_SESSION['vienecarrito'] = false;
+            header("Location: ../index.php?opc=pedido");
+        } else {
+            // Verificar si hay redirección pendiente
+            if (isset($_SESSION['redirect_after_login'])) {
+                $redirect = $_SESSION['redirect_after_login'];
+                unset($_SESSION['redirect_after_login']);
+                header("Location: ../index.php?opc=$redirect");
+            } else {
+                header("Location: ../index.php?opc=dashboard");
+            }
+        }
+        exit();
     } else {
-        header("Location: ../index.php?opc=productos");
+        header("Location: ../index.php?opc=login&error=invalid");
+        exit;
     }
-    exit(); // Importante: detener la ejecución del script después de la redirección
 } else {
-	echo "<script>alert('Credenciales incorrectas. Por favor, inténtalo de nuevo.'); 
-			window.location.href = '../index.php?opc=login';</script>";
-	exit;
+    header("Location: ../index.php?opc=login&error=invalid");
+    exit;
 }
 
 ?>

@@ -1,5 +1,6 @@
 <?php
-$opcion = $_GET['opc']; 
+// Verificar si existe el parámetro 'opc' y asignar valor por defecto si no existe
+$opcion = $_GET['opc'] ?? 'inicio'; 
 // En esta variable voy a obtener de la variable opc el valor de la opcion que se selecciona en el menu
 
 switch ($opcion) {
@@ -33,6 +34,9 @@ switch ($opcion) {
         
     case 'dashboard':
         include './view/V_Administrador.php';
+        break;
+    case 'inicio':
+        include './view/V_Inicio.php';
         break;
     case 'agregar_producto':
 		include './view/V_AgregarProducto.php';
