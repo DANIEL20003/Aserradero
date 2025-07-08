@@ -105,54 +105,5 @@ $additionalCSS = ["../public/css/admin-dashboard.css"];
 
 </main>
 
-<script>
-    function navigateTo(seccion) {
-        switch(seccion) {
-            case 'productos':
-                window.location.href = '../controller/Copciones.php?opc=productos';
-                break;
-            case 'clientes':
-                window.location.href = '../controller/Copciones.php?opc=clientes';
-                break;
-            case 'reportes':
-                window.location.href = '../controller/Copciones.php?opc=reportes';
-                break;
-            case 'facturas':
-                window.location.href = '../controller/Copciones.php?opc=facturas';
-                break;
-            case 'usuarios':
-                window.location.href = '../controller/Copciones.php?opc=usuarios';
-                break;
-            case 'configuracion':
-                window.location.href = '../controller/Copciones.php?opc=configuracion';
-                break;
-            case 'inventario':
-                window.location.href = '../controller/Copciones.php?opc=inventario';
-                break;
-            case 'ventas':
-                window.location.href = '../controller/Copciones.php?opc=ventas';
-                break;
-            case 'proveedores':
-                window.location.href = '../controller/Copciones.php?opc=proveedores';
-                break;
-            default:
-                console.log('Sección no encontrada:', seccion);
-                window.location.href = '../controller/Copciones.php?opc=dashboard';
-        }
-    }
-
-   
-    
-
-    document.querySelectorAll('.dashboard-card').forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-10px) scale(1.02)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
-        });
-    });
-</script>
 
 <?php include '../public/layaout/footer.php'; ?>
