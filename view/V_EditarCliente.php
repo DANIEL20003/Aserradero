@@ -1,15 +1,41 @@
 <?php
-// Obtener el ID del cliente a editar
-$id_cliente = $_GET['id'];
+// Habilitar errores para debugging
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-// Incluir conexión y obtener los datos del cliente
+// Verificar que se recibió el ID del cliente
+if (!isset($_GET['id']) || empty($_GET['id'])) {
+    echo "<script>alert('ID de cliente no proporcionado.'); window.location.href = 'index.php?opc=listar_clientes';</script>";
+    exit;
+}
+
+$id_cliente = intval($_GET['id']);
+
+// Verificar que el ID es válido
+if ($id_cliente <= 0) {
+    echo "<script>alert('ID de cliente inválido.'); window.location.href = 'index.php?opc=listar_clientes';</script>";
+    exit;
+}
+
+// Incluir conexión y verificar que funciona
 include_once './config/Cconexion.php';
-$sql = "SELECT * FROM Usuarios WHERE id_usuario = $id_cliente AND activo = 1";
-$resultado = mysqli_query($conexion, $sql);
+
+if (!$conexion) {
+    echo "<script>alert('Error de conexión a la base de datos: " . mysqli_connect_error() . "'); window.location.href = 'index.php?opc=listar_clientes';</script>";
+    exit;
+}
+
+// Obtener los datos del cliente
+$sql = "SELECT * FROM Usuarios WHERE id_usuario = ? AND activo = 1";
+$stmt = mysqli_prepare($conexion, $sql);
+mysqli_stmt_bind_param($stmt, "i", $id_cliente);
+mysqli_stmt_execute($stmt);
+$resultado = mysqli_stmt_get_result($stmt);
 $cliente = mysqli_fetch_assoc($resultado);
 
 if (!$cliente) {
-    echo "<script>alert('Cliente no encontrado.'); window.location.href = 'index.php?opc=listar_clientes';</script>";
+    echo "<script>alert('Cliente no encontrado o inactivo. ID: $id_cliente'); window.location.href = 'index.php?opc=listar_clientes';</script>";
     exit;
 }
 

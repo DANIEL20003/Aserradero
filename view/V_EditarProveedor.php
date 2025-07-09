@@ -1,15 +1,41 @@
 <?php
-// Obtener el ID del proveedor a editar
-$id_proveedor = $_GET['id'];
+// Habilitar errores para debugging
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-// Incluir conexión y obtener los datos del proveedor
+// Verificar que se recibió el ID del proveedor
+if (!isset($_GET['id']) || empty($_GET['id'])) {
+    echo "<script>alert('ID de proveedor no proporcionado.'); window.location.href = 'index.php?opc=listar_proveedores';</script>";
+    exit;
+}
+
+$id_proveedor = intval($_GET['id']);
+
+// Verificar que el ID es válido
+if ($id_proveedor <= 0) {
+    echo "<script>alert('ID de proveedor inválido.'); window.location.href = 'index.php?opc=listar_proveedores';</script>";
+    exit;
+}
+
+// Incluir conexión y verificar que funciona
 include_once './config/Cconexion.php';
-$sql = "SELECT * FROM Proveedores WHERE id_proveedor = $id_proveedor AND activo = 1";
-$resultado = mysqli_query($conexion, $sql);
+
+if (!$conexion) {
+    echo "<script>alert('Error de conexión a la base de datos: " . mysqli_connect_error() . "'); window.location.href = 'index.php?opc=listar_proveedores';</script>";
+    exit;
+}
+
+// Obtener los datos del proveedor
+$sql = "SELECT * FROM Proveedores WHERE id_proveedor = ? AND activo = 1";
+$stmt = mysqli_prepare($conexion, $sql);
+mysqli_stmt_bind_param($stmt, "i", $id_proveedor);
+mysqli_stmt_execute($stmt);
+$resultado = mysqli_stmt_get_result($stmt);
 $proveedor = mysqli_fetch_assoc($resultado);
 
 if (!$proveedor) {
-    echo "<script>alert('Proveedor no encontrado.'); window.location.href = 'index.php?opc=listar_proveedores';</script>";
+    echo "<script>alert('Proveedor no encontrado o inactivo. ID: $id_proveedor'); window.location.href = 'index.php?opc=listar_proveedores';</script>";
     exit;
 }
 

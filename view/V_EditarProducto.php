@@ -1,17 +1,41 @@
 <?php
-// Obtener el ID del producto a editar
-$id_producto = $_GET['id'];
+// Habilitar errores para debugging
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-// Incluir conexión y obtener los datos del producto
+// Verificar que se recibió el ID del producto
+if (!isset($_GET['id']) || empty($_GET['id'])) {
+    echo "<script>alert('ID de producto no proporcionado.'); window.location.href = 'index.php?opc=listar_productos';</script>";
+    exit;
+}
+
+$id_producto = intval($_GET['id']);
+
+// Verificar que el ID es válido
+if ($id_producto <= 0) {
+    echo "<script>alert('ID de producto inválido.'); window.location.href = 'index.php?opc=listar_productos';</script>";
+    exit;
+}
+
+// Incluir conexión y verificar que funciona
 include_once './config/Cconexion.php';
 
+if (!$conexion) {
+    echo "<script>alert('Error de conexión a la base de datos: " . mysqli_connect_error() . "'); window.location.href = 'index.php?opc=listar_productos';</script>";
+    exit;
+}
+
 // Obtener los datos del producto
-$sql_producto = "SELECT * FROM Productos WHERE id_producto = $id_producto AND activo = 1";
-$resultado_producto = mysqli_query($conexion, $sql_producto);
+$sql_producto = "SELECT * FROM Productos WHERE id_producto = ? AND activo = 1";
+$stmt_producto = mysqli_prepare($conexion, $sql_producto);
+mysqli_stmt_bind_param($stmt_producto, "i", $id_producto);
+mysqli_stmt_execute($stmt_producto);
+$resultado_producto = mysqli_stmt_get_result($stmt_producto);
 $producto = mysqli_fetch_assoc($resultado_producto);
 
 if (!$producto) {
-    echo "<script>alert('Producto no encontrado.'); window.location.href = 'index.php?opc=listar_productos';</script>";
+    echo "<script>alert('Producto no encontrado o inactivo. ID: $id_producto'); window.location.href = 'index.php?opc=listar_productos';</script>";
     exit;
 }
 

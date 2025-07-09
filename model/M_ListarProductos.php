@@ -3,48 +3,39 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Iniciar sesión si no está iniciada
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-
 include('./config/Cconexion.php');
 
-// Consulta para obtener productos con información de categorías y proveedores
-$sql_consulta = "SELECT p.id_producto, p.nombre, p.descripcion, p.imagen_url, p.precio, p.stock, 
-                         p.id_categoria, p.id_proveedor,
-                         COALESCE(c.descripcion, 'Sin categoría') as categoria_nombre,
-                         COALESCE(pr.descripcion, 'Sin proveedor') as proveedor_nombre
-                  FROM Productos p 
-                  LEFT JOIN Categorias c ON p.id_categoria = c.id_categoria 
-                  LEFT JOIN Proveedores pr ON p.id_proveedor = pr.id_proveedor 
-                  WHERE p.activo = 1
-                  ORDER BY p.nombre";
+// Obtener valores del formulario
 
+// Insertar provincia y obtener su ID
+$sql_consulta = "SELECT * FROM Productos WHERE activo = true"; // Asegúrate de que la consulta sea correcta según tu base de dato
 $result = mysqli_query($conexion, $sql_consulta);
 
 if($result) {
-    $productos = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    
-    // Convertir encoding si es necesario (alternativa moderna a utf8_encode)
-    if (!empty($productos)) {
-        foreach ($productos as &$producto) {
-            foreach ($producto as $key => &$value) {
-                if (is_string($value) && $value !== null) {
-                    // Asegurar UTF-8 sin usar función deprecada
-                    $value = mb_convert_encoding($value, 'UTF-8', 'auto');
-                }
+	$productos_raw = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $productos = [];
+    foreach ($productos_raw as $producto) {
+        $producto_encoded = [];
+        foreach ($producto as $key => $value) {
+            if (is_string($value)) {
+                $producto_encoded[$key] = mb_convert_encoding($value, 'UTF-8', 'ISO-8859-1');
+            } else {
+                $producto_encoded[$key] = $value;
             }
         }
+        $productos[] = $producto_encoded;
     }
-    
-    // Guardar productos en sesión
-    $_SESSION['productos'] = $productos;
-    
+	// Aquí podrías procesar los productos obtenidos si es necesario
+	// Por ejemplo, podrías guardarlas en una variable de sesión o pasarlas a una vista
+
+	// Redirigir a la página de listar productos
+	$_SESSION['productos'] = $productos; // Guardar en sesión si es necesario
+	// header("Location: ../index.php?pagina=listar_productos");
+
 } else {
-    echo "<script>alert('Error al obtener la lista de productos: " . mysqli_error($conexion) . "'); 
-            window.location.href = '../index.php?opc=dashboard';</script>";
-    exit;
+	echo "<script>alert('No se pudo agregar el producto. Por favor, inténtalo de nuevo.'); 
+			window.location.href = '../index.php?opc=agregar_producto';</script>";
+	exit;
 }
 
 ?>

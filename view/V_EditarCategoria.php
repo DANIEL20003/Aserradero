@@ -1,15 +1,41 @@
 <?php
-// Obtener el ID de la categoría a editar
-$id_categoria = $_GET['id'];
+// Habilitar errores para debugging
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-// Incluir conexión y obtener los datos de la categoría
+// Verificar que se recibió el ID de la categoría
+if (!isset($_GET['id']) || empty($_GET['id'])) {
+    echo "<script>alert('ID de categoría no proporcionado.'); window.location.href = 'index.php?opc=listar_categorias';</script>";
+    exit;
+}
+
+$id_categoria = intval($_GET['id']);
+
+// Verificar que el ID es válido
+if ($id_categoria <= 0) {
+    echo "<script>alert('ID de categoría inválido.'); window.location.href = 'index.php?opc=listar_categorias';</script>";
+    exit;
+}
+
+// Incluir conexión y verificar que funciona
 include_once './config/Cconexion.php';
-$sql = "SELECT * FROM Categorias WHERE id_categoria = $id_categoria AND activo = 1";
-$resultado = mysqli_query($conexion, $sql);
+
+if (!$conexion) {
+    echo "<script>alert('Error de conexión a la base de datos: " . mysqli_connect_error() . "'); window.location.href = 'index.php?opc=listar_categorias';</script>";
+    exit;
+}
+
+// Obtener los datos de la categoría
+$sql = "SELECT * FROM Categorias WHERE id_categoria = ? AND activo = 1";
+$stmt = mysqli_prepare($conexion, $sql);
+mysqli_stmt_bind_param($stmt, "i", $id_categoria);
+mysqli_stmt_execute($stmt);
+$resultado = mysqli_stmt_get_result($stmt);
 $categoria = mysqli_fetch_assoc($resultado);
 
 if (!$categoria) {
-    echo "<script>alert('Categoría no encontrada.'); window.location.href = 'index.php?opc=listar_categorias';</script>";
+    echo "<script>alert('Categoría no encontrada o inactiva. ID: $id_categoria'); window.location.href = 'index.php?opc=listar_categorias';</script>";
     exit;
 }
 

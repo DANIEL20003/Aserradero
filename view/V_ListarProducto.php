@@ -28,7 +28,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-include_once './model/M_ListarProductos.php';
+include './model/M_ListarProductos.php';
 
 $productos = isset($_SESSION['productos']) ? $_SESSION['productos'] : [];
 ?>

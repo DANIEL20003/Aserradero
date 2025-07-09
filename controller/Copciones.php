@@ -51,17 +51,26 @@ switch ($opcion) {
 	case 'listar_productos':
 		include './view/V_ListarProducto.php';
 		break;
+	case 'editar_producto':
+		include './view/V_EditarProducto.php';
+		break;
 	case 'listar_categorias':
 		include './view/V_ListarCategoria.php';
 		break;
 	case 'agregar_categoria':
 		include './view/V_AgregarCategoria.php';
 		break;
+	case 'editar_categoria':
+		include './view/V_EditarCategoria.php';
+		break;
 	case 'listar_proveedores':
 		include './view/V_ListarProveedor.php';
 		break;
 	case 'agregar_proveedor':
 		include './view/V_AgregarProveedor.php';
+		break;
+	case 'editar_proveedor':
+		include './view/V_EditarProveedor.php';
 		break;
 	case 'listar_ventas':
 		include './view/V_ListarVenta.php';
@@ -74,6 +83,9 @@ switch ($opcion) {
 		break;
 	case 'agregar_cliente':
 		include './view/V_AgregarCliente.php';
+		break;
+	case 'editar_cliente':
+		include './view/V_EditarCliente.php';
 		break;
     
     default:
