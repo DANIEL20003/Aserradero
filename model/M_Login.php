@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -16,7 +19,7 @@ if(empty($email) || empty($clave)){
 }
 
 // Usar prepared statement para evitar inyección SQL
-$sql = "SELECT * FROM Usuarios WHERE correo = ? AND activo = 1";
+$sql = "SELECT * FROM Usuarios WHERE correo = ? AND clave = ? AND activo = 1";
 $stmt = mysqli_prepare($conexion, $sql);
 
 if (!$stmt) {
@@ -24,7 +27,7 @@ if (!$stmt) {
     exit;
 }
 
-mysqli_stmt_bind_param($stmt, "s", $email);
+mysqli_stmt_bind_param($stmt, "ss", $email, $clave);
 mysqli_stmt_execute($stmt);
 $resultado = mysqli_stmt_get_result($stmt);
 
@@ -37,7 +40,7 @@ if(mysqli_num_rows($resultado) > 0) {
     $fila = mysqli_fetch_assoc($resultado);
     
     // Verificar la contraseña hasheada
-    if (password_verify($clave, $fila['clave'])) {
+    if ($clave == $fila['clave']) {
         $_SESSION['sesion_iniciada'] = "iniciado";
         $_SESSION['id_usuario'] = $fila['id_usuario'];
         $_SESSION['nombre'] = $fila['nombre'];

@@ -77,6 +77,32 @@
         </nav>
     </header>
 
-    
+    <script>
+        // Función de búsqueda
+        function realizarBusqueda() {
+            const searchInput = document.querySelector('.search-input');
+            const searchTerm = searchInput.value.trim();
+            
+            if (searchTerm) {
+                console.log('Buscando:', searchTerm);
+                // Aquí puedes implementar la lógica de búsqueda
+                alert(`Buscando: ${searchTerm}`);
+            } else {
+                alert('Por favor, ingresa un término de búsqueda');
+            }
+        }
+        
+        // Ejecutar búsqueda al presionar Enter
+		const searchInput = document.querySelector('.search-input');
+		if (searchInput) {
+			searchInput.addEventListener('keypress', function(e) {
+				if (e.key === 'Enter') {
+					realizarBusqueda();
+				}
+			});
+		}
+        
+    </script>
+
     <!-- Scripts JavaScript -->
     <script src="public/js/Login.js"></script>
