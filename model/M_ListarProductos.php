@@ -8,7 +8,15 @@ include('./config/Cconexion.php');
 // Obtener valores del formulario
 
 // Insertar provincia y obtener su ID
-$sql_consulta = "SELECT * FROM Productos WHERE activo = true"; // Asegúrate de que la consulta sea correcta según tu base de dato
+$sql_consulta = "
+    SELECT 
+        p.*, 
+        c.descripcion AS categoria_nombre, 
+        pr.descripcion AS proveedor_nombre 
+    FROM Productos p
+    LEFT JOIN Categorias c ON p.id_categoria = c.id_categoria
+    LEFT JOIN Proveedores pr ON p.id_proveedor = pr.id_proveedor
+    WHERE p.activo = true";
 $result = mysqli_query($conexion, $sql_consulta);
 
 if($result) {
