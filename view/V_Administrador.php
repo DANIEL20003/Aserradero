@@ -243,10 +243,18 @@ if (!isset($_SESSION['sesion_iniciada']) || $_SESSION['sesion_iniciada'] !== "in
                     <h2 class="card-title">Productos</h2>
                 </div>
                 <div class="card-actions">
+					<?php if($_SESSION['esAdmin']): ?>
                     <a href="?opc=listar_productos" class="btn btn-primary">
                         <i class="fas fa-list"></i>
                         Listar Productos
                     </a>
+					<?php endif; ?>
+					<?php if(!$_SESSION['esAdmin']): ?>
+					<a href="?" class="btn btn-primary">
+						<i class="fas fa-list"></i>
+						Mis Productos
+					</a>
+					<?php endif; ?>
 					<?php if($_SESSION['esAdmin']): ?>
                     <a href="?opc=agregar_producto" class="btn btn-secondary">
                         <i class="fas fa-plus"></i>
@@ -313,7 +321,7 @@ if (!isset($_SESSION['sesion_iniciada']) || $_SESSION['sesion_iniciada'] !== "in
 			<?php endif; ?>
 
             <!-- Ventas -->
-
+				<?php if($_SESSION['esAdmin']): ?>
             <div class="card">
                 <div class="card-header">
                     <i class="fas fa-cash-register card-icon"></i>
@@ -330,6 +338,7 @@ if (!isset($_SESSION['sesion_iniciada']) || $_SESSION['sesion_iniciada'] !== "in
                     </a>
                 </div>
             </div>
+			<?php endif; ?>
 
             <!-- Pedidos -->
             <?php if($_SESSION['esAdmin']): ?>
