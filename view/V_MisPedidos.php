@@ -20,12 +20,14 @@ $sql = "SELECT p.*,
                   WHEN p.estado = 'pendiente' THEN 'Pendiente'
                   WHEN p.estado = 'aceptado' THEN 'Aceptado'
                   WHEN p.estado = 'cancelado' THEN 'Cancelado'
+                  WHEN p.estado = 'facturado' THEN 'Facturado'
                   ELSE p.estado
                END AS estado_formatted,
                CASE 
                   WHEN p.estado = 'pendiente' THEN 'warning' 
                   WHEN p.estado = 'aceptado' THEN 'success'
                   WHEN p.estado = 'cancelado' THEN 'danger'
+                  WHEN p.estado = 'facturado' THEN 'info'
                   ELSE 'secondary'
                END AS estado_class
         FROM Pedidos p
@@ -271,6 +273,22 @@ $pedidos = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
                                     echo $fecha_entrega;
                                 ?>
                             </p>
+                        </div>
+                        <?php endif; ?>
+                        
+                        <?php if ($pedido['estado'] == 'facturado'): ?>
+                        <div class="mt-3 p-3 bg-primary bg-opacity-10 rounded border border-primary border-opacity-25">
+                            <h6 class="text-primary mb-3">
+                                <i class="fas fa-file-invoice"></i> Factura generada
+                            </h6>
+                            <p class="mb-3 small text-muted">
+                                Su pedido ha sido procesado y la factura está disponible para descarga.
+                            </p>
+                            <a href="index.php?opc=generar_factura&pedido_id=<?php echo $pedido['id_pedido']; ?>" 
+                               class="btn btn-primary btn-sm" 
+                               target="_blank">
+                                <i class="fas fa-download"></i> Descargar Factura
+                            </a>
                         </div>
                         <?php endif; ?>
                     </div>
