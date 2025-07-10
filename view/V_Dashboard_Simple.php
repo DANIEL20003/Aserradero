@@ -221,7 +221,7 @@ if (!isset($_SESSION['sesion_iniciada']) || $_SESSION['sesion_iniciada'] !== "in
             <?php if (isset($_SESSION['esAdmin']) && $_SESSION['esAdmin']): ?>
                 <span class="admin-badge">Admin</span>
             <?php endif; ?>
-            <a href="index.php?opc=logout" class="logout-btn" onclick="return confirm('¿Cerrar sesión?')">
+            <a href="./model/M_Logout.php" class="logout-btn" onclick="return confirm('¿Cerrar sesión?')">
                 <i class="fas fa-sign-out-alt"></i>
                 Cerrar Sesión
             </a>
@@ -318,6 +318,20 @@ if (!isset($_SESSION['sesion_iniciada']) || $_SESSION['sesion_iniciada'] !== "in
                     <a href="?opc=agregar_venta" class="btn btn-secondary">
                         <i class="fas fa-plus"></i>
                         Agregar Venta
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mis Pedidos -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-shopping-bag card-icon"></i>
+                    <h2 class="card-title">Mis Pedidos</h2>
+                </div>
+                <div class="card-actions">
+                    <a href="?opc=mis_pedidos" class="btn btn-primary">
+                        <i class="fas fa-list"></i>
+                        Ver Mis Pedidos
                     </a>
                 </div>
             </div>

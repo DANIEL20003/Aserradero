@@ -72,8 +72,23 @@
         </div>
         
         <nav class="nav">
-            <a href="public/Login/Quienessomos.html">Nuestra Historia</a>
-            <a href="?opc=login">Iniciar Sesión</a>
+            <a href="?opc=inicio">Inicio</a>
+            <a href="?opc=productos">Productos</a>
+            <?php if (isset($_SESSION['sesion_iniciada']) && $_SESSION['sesion_iniciada'] == 'iniciado'): ?>
+                <div class="dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-fill"></i> <?php echo htmlspecialchars($_SESSION['nombre']); ?>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="?opc=mis_pedidos">Mis Pedidos</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="./model/M_Logout.php">Cerrar Sesión</a></li>
+                    </ul>
+                </div>
+            <?php else: ?>
+                <a href="public/Login/Quienessomos.html">Nuestra Historia</a>
+                <a href="?opc=login">Iniciar Sesión</a>
+            <?php endif; ?>
         </nav>
     </header>
 
@@ -101,6 +116,23 @@
 				}
 			});
 		}
+        
+        // Inicializar dropdown cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', function() {
+            // Esperar a que Bootstrap se cargue
+            function initializeDropdown() {
+                if (typeof bootstrap !== 'undefined') {
+                    const dropdownElement = document.getElementById('navbarDropdownMenuLink');
+                    if (dropdownElement) {
+                        new bootstrap.Dropdown(dropdownElement);
+                    }
+                } else {
+                    // Intentar de nuevo en 100ms si Bootstrap no está cargado
+                    setTimeout(initializeDropdown, 100);
+                }
+            }
+            initializeDropdown();
+        });
         
     </script>
 

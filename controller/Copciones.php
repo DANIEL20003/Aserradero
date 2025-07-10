@@ -78,6 +78,12 @@ switch ($opcion) {
 	case 'agregar_venta':
 		include './view/V_AgregarVenta.php';
 		break;
+	case 'ver_venta':
+		include './view/V_VerVenta.php';
+		break;
+	case 'editar_venta':
+		include './view/V_EditarVenta.php';
+		break;
 	case 'listar_clientes':
 		include './view/V_ListarCliente.php';
 		break;
@@ -87,6 +93,26 @@ switch ($opcion) {
 	case 'editar_cliente':
 		include './view/V_EditarCliente.php';
 		break;
+
+    case 'mis_pedidos':
+        include './view/V_MisPedidos.php';
+        break;
+
+    case 'checkout':
+        include './view/V_Checkout.php';
+        break;
+        
+    case 'checkout_admin':
+        include './view/V_CheckoutAdmin.php';
+        break;
+        
+    case 'gestion_pedidos':
+        include './view/V_GestionPedidos.php';
+        break;
+        
+    case 'generar_factura':
+        include './model/M_GenerarFactura.php';
+        break;
     
     default:
         // Si no se encuentra la opción, redirigir al dashboard

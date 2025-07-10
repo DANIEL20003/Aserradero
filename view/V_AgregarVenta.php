@@ -3,7 +3,7 @@
 include_once './config/Cconexion.php';
 
 // Obtener clientes activos para el select
-$sql_clientes = "SELECT id_usuario, nombre, cedula FROM Usuarios WHERE activo = 1 AND rol = 'cliente'";
+$sql_clientes = "SELECT id_usuario, nombre, cedula FROM Usuarios WHERE activo = 1";
 $resultado_clientes = mysqli_query($conexion, $sql_clientes);
 $clientes = mysqli_fetch_all($resultado_clientes, MYSQLI_ASSOC);
 

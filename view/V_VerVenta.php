@@ -12,18 +12,22 @@ $sql_venta = "SELECT
                 p.total,
                 p.estado,
                 p.creado_en,
+                p.receptor,
+                p.correo,
+                p.telefono,
+                p.identificacion,
+                p.metodo_pago,
                 u.nombre as cliente_nombre,
-                u.correo as cliente_correo,
-                u.cedula as cliente_cedula,
-                f.id_factura,
-                f.secuencial,
-                f.fecha_emision
+                u.correo as cliente_email,
+                u.cedula as cliente_cedula
               FROM Pedidos p
               LEFT JOIN Usuarios u ON p.id_usuario = u.id_usuario
-              LEFT JOIN Facturas f ON p.id_pedido = f.id_pedido
-              WHERE p.id_pedido = $id_venta AND p.activo = 1";
+              WHERE p.id_pedido = ? AND p.activo = 1";
 
-$resultado_venta = mysqli_query($conexion, $sql_venta);
+$stmt = mysqli_prepare($conexion, $sql_venta);
+mysqli_stmt_bind_param($stmt, "i", $id_venta);
+mysqli_stmt_execute($stmt);
+$resultado_venta = mysqli_stmt_get_result($stmt);
 $venta = mysqli_fetch_assoc($resultado_venta);
 
 if (!$venta) {
@@ -36,16 +40,19 @@ $sql_detalles = "SELECT
                    pd.id_producto,
                    pd.cantidad,
                    pd.precio,
-                   pd.subtotal,
+                   (pd.cantidad * pd.precio) as subtotal,
                    pr.nombre as producto_nombre,
                    pr.descripcion as producto_descripcion,
                    c.descripcion as categoria_nombre
                  FROM Pedido_detalles pd
                  LEFT JOIN Productos pr ON pd.id_producto = pr.id_producto
                  LEFT JOIN Categorias c ON pr.id_categoria = c.id_categoria
-                 WHERE pd.id_pedido = $id_venta";
+                 WHERE pd.id_pedido = ?";
 
-$resultado_detalles = mysqli_query($conexion, $sql_detalles);
+$stmt_detalles = mysqli_prepare($conexion, $sql_detalles);
+mysqli_stmt_bind_param($stmt_detalles, "i", $id_venta);
+mysqli_stmt_execute($stmt_detalles);
+$resultado_detalles = mysqli_stmt_get_result($stmt_detalles);
 $detalles = mysqli_fetch_all($resultado_detalles, MYSQLI_ASSOC);
 
 // Configuración de la página
@@ -89,17 +96,10 @@ include './view/V_Header_Admin.php';
                 <i class="fas fa-arrow-left"></i>
                 Volver
             </a>
-            <?php if (empty($venta['id_factura'])): ?>
-                <a href="./model/M_GenerarFactura.php?id=<?php echo $venta['id_pedido']; ?>" class="btn-action btn-success-custom">
-                    <i class="fas fa-file-invoice"></i>
-                    Generar Factura
-                </a>
-            <?php else: ?>
-                <a href="./model/M_DescargarFactura.php?id=<?php echo $venta['id_factura']; ?>" class="btn-action btn-info-custom">
-                    <i class="fas fa-download"></i>
-                    Descargar Factura
-                </a>
-            <?php endif; ?>
+            <a href="index.php?opc=generar_factura&pedido_id=<?php echo $venta['id_pedido']; ?>" class="btn-action btn-success-custom" target="_blank">
+                <i class="fas fa-file-invoice"></i>
+                Generar Factura
+            </a>
         </div>
     </div>
 
@@ -175,16 +175,16 @@ include './view/V_Header_Admin.php';
                             <strong>Nombre:</strong>
                         </div>
                         <div class="col-8">
-                            <?php echo htmlspecialchars($venta['cliente_nombre']); ?>
+                            <?php echo htmlspecialchars($venta['receptor'] ?? $venta['cliente_nombre'] ?? 'No especificado'); ?>
                         </div>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col-4">
-                            <strong>Cédula:</strong>
+                            <strong>Identificación:</strong>
                         </div>
                         <div class="col-8">
-                            <?php echo htmlspecialchars($venta['cliente_cedula']); ?>
+                            <?php echo htmlspecialchars($venta['identificacion'] ?? $venta['cliente_cedula'] ?? 'No especificado'); ?>
                         </div>
                     </div>
                     <hr>
@@ -193,22 +193,26 @@ include './view/V_Header_Admin.php';
                             <strong>Correo:</strong>
                         </div>
                         <div class="col-8">
-                            <?php echo htmlspecialchars($venta['cliente_correo']); ?>
+                            <?php echo htmlspecialchars($venta['correo'] ?? $venta['cliente_email'] ?? 'No especificado'); ?>
                         </div>
                     </div>
-                    <?php if (!empty($venta['id_factura'])): ?>
+                    <hr>
+                    <div class="row">
+                        <div class="col-4">
+                            <strong>Teléfono:</strong>
+                        </div>
+                        <div class="col-8">
+                            <?php echo htmlspecialchars($venta['telefono'] ?? 'No especificado'); ?>
+                        </div>
+                    </div>
+                    <?php if (!empty($venta['metodo_pago'])): ?>
                         <hr>
                         <div class="row">
                             <div class="col-4">
-                                <strong>Factura:</strong>
+                                <strong>Método de Pago:</strong>
                             </div>
                             <div class="col-8">
-                                <span class="badge bg-success">
-                                    #<?php echo $venta['secuencial'] ?? $venta['id_factura']; ?>
-                                </span>
-                                <br><small class="text-muted">
-                                    <?php echo date('d/m/Y', strtotime($venta['fecha_emision'])); ?>
-                                </small>
+                                <?php echo htmlspecialchars($venta['metodo_pago']); ?>
                             </div>
                         </div>
                     <?php endif; ?>

@@ -28,9 +28,10 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-include_once './model/M_ListarClientes.php';
+include './model/M_ListarClientes.php';
 
 $clientes = isset($_SESSION['clientes']) ? $_SESSION['clientes'] : [];
+print_r($clientes); // Para depuración, eliminar en producción
 ?>
 
 <div class="content-card">

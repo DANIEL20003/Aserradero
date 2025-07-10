@@ -13,8 +13,12 @@ if (!isset($_SESSION['sesion_iniciada']) || $_SESSION['sesion_iniciada'] !== "in
 }
 
 require_once '../config/Cconexion.php';
+require_once '../config/clavebasededatos.php';
 
 try {
+    $pdo = new PDO("mysql:host=$hostname;dbname=$database;charset=utf8", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
     // Obtener datos JSON del POST
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
@@ -23,118 +27,152 @@ try {
         throw new Exception('Datos inválidos');
     }
     
-    // Validar datos requeridos
-    $required_fields = ['nombre', 'email', 'telefono', 'direccion', 'ciudad', 'metodo_pago', 'items', 'total'];
-    foreach ($required_fields as $field) {
-        if (empty($data[$field])) {
-            throw new Exception("Campo requerido faltante: $field");
-        }
-    }
+    // Determinar si es un pedido creado por admin
+    $es_admin_pedido = isset($data['admin_pedido']) && $data['admin_pedido'] === true;
     
-    if (empty($data['items']) || !is_array($data['items'])) {
-        throw new Exception('El carrito está vacío');
+    if ($es_admin_pedido) {
+        // Verificar que el usuario sea admin
+        if (!$_SESSION['esAdmin']) {
+            throw new Exception('No tienes permisos para crear pedidos para otros usuarios');
+        }
+        
+        // Validar datos para pedido de admin
+        $required_fields = ['cliente_id', 'productos', 'total'];
+        foreach ($required_fields as $field) {
+            if (!isset($data[$field])) {
+                throw new Exception("Campo requerido faltante: $field");
+            }
+        }
+        
+        if (empty($data['productos']) || !is_array($data['productos'])) {
+            throw new Exception('El carrito está vacío');
+        }
+        
+        $cliente_id = (int)$data['cliente_id'];
+        $productos = $data['productos'];
+        $total = (float)$data['total'];
+        
+    } else {
+        // Validar datos para pedido normal del usuario
+        $required_fields = ['nombre', 'email', 'telefono', 'metodo_pago', 'items', 'total'];
+        foreach ($required_fields as $field) {
+            if (empty($data[$field])) {
+                throw new Exception("Campo requerido faltante: $field");
+            }
+        }
+        
+        if (empty($data['items']) || !is_array($data['items'])) {
+            throw new Exception('El carrito está vacío');
+        }
     }
     
     // Comenzar transacción
-    mysqli_begin_transaction($conexion);
+    $pdo->beginTransaction();
     
-    // Insertar pedido principal
-    $sql_pedido = "INSERT INTO Ventas (
-        id_cliente, 
-        fecha_venta, 
-        subtotal, 
-        costo_envio, 
-        total, 
-        metodo_pago, 
-        estado,
-        direccion_entrega,
-        ciudad_entrega,
-        telefono_contacto,
-        comentarios
-    ) VALUES (?, NOW(), ?, ?, ?, ?, 'pendiente', ?, ?, ?, ?)";
-    
-    $stmt_pedido = mysqli_prepare($conexion, $sql_pedido);
-    
-    if (!$stmt_pedido) {
-        throw new Exception('Error preparando consulta de pedido');
-    }
-    
-    $id_cliente = $_SESSION['id_usuario'];
-    $subtotal = $data['subtotal'];
-    $costo_envio = $data['costo_envio'];
-    $total = $data['total'];
-    $metodo_pago = $data['metodo_pago'];
-    $direccion = $data['direccion'];
-    $ciudad = $data['ciudad'];
-    $telefono = $data['telefono'];
-    $comentarios = $data['comentarios'] ?? '';
-    
-    mysqli_stmt_bind_param($stmt_pedido, "idddsssss", 
-        $id_cliente, $subtotal, $costo_envio, $total, $metodo_pago, 
-        $direccion, $ciudad, $telefono, $comentarios
-    );
-    
-    if (!mysqli_stmt_execute($stmt_pedido)) {
-        throw new Exception('Error al insertar pedido');
-    }
-    
-    $id_venta = mysqli_insert_id($conexion);
-    
-    // Insertar detalles del pedido
-    $sql_detalle = "INSERT INTO DetalleVentas (id_venta, id_producto, cantidad, precio_unitario, subtotal) 
-                    VALUES (?, ?, ?, ?, ?)";
-    $stmt_detalle = mysqli_prepare($conexion, $sql_detalle);
-    
-    if (!$stmt_detalle) {
-        throw new Exception('Error preparando consulta de detalle');
-    }
-    
-    foreach ($data['items'] as $item) {
-        $id_producto = $item['id'];
-        $cantidad = $item['quantity'];
-        $precio_unitario = $item['price'];
-        $subtotal_item = $cantidad * $precio_unitario;
+    if ($es_admin_pedido) {
+        // Insertar pedido creado por admin
+        $stmt = $pdo->prepare("
+            INSERT INTO Pedidos (id_usuario, total, estado, creado_en, activo) 
+            VALUES (?, ?, 'pendiente', NOW(), 1)
+        ");
+        $stmt->execute([$cliente_id, $total]);
+        $pedido_id = $pdo->lastInsertId();
         
-        mysqli_stmt_bind_param($stmt_detalle, "iiidd", 
-            $id_venta, $id_producto, $cantidad, $precio_unitario, $subtotal_item
-        );
+        // Insertar detalles del pedido
+        $stmt_detalle = $pdo->prepare("
+            INSERT INTO Pedido_detalles (id_pedido, id_producto, cantidad, precio) 
+            VALUES (?, ?, ?, ?)
+        ");
         
-        if (!mysqli_stmt_execute($stmt_detalle)) {
-            throw new Exception('Error al insertar detalle del pedido');
+        foreach ($productos as $producto) {
+            // Verificar stock disponible
+            $stmt_stock = $pdo->prepare("SELECT stock FROM Productos WHERE id_producto = ?");
+            $stmt_stock->execute([$producto['id']]);
+            $stock_actual = $stmt_stock->fetchColumn();
+            
+            if ($stock_actual < $producto['cantidad']) {
+                throw new Exception("Stock insuficiente para el producto: {$producto['nombre']}");
+            }
+            
+            $stmt_detalle->execute([
+                $pedido_id,
+                $producto['id'],
+                $producto['cantidad'],
+                $producto['precio']
+            ]);
         }
         
-        // Actualizar stock del producto
-        $sql_stock = "UPDATE Productos SET stock = stock - ? WHERE id_producto = ?";
-        $stmt_stock = mysqli_prepare($conexion, $sql_stock);
+    } else {
+        // Insertar pedido normal del usuario
+        $stmt = $pdo->prepare("
+            INSERT INTO Pedidos (
+                id_usuario, 
+                total, 
+                estado,
+                creado_en,
+                activo,
+                receptor,
+                correo,
+                telefono,
+                identificacion,
+                metodo_pago
+            ) VALUES (?, ?, 'pendiente', NOW(), 1, ?, ?, ?, ?, ?)
+        ");
         
-        if ($stmt_stock) {
-            mysqli_stmt_bind_param($stmt_stock, "ii", $cantidad, $id_producto);
-            mysqli_stmt_execute($stmt_stock);
-            mysqli_stmt_close($stmt_stock);
+        $stmt->execute([
+            $_SESSION['id_usuario'],
+            $data['total'],
+            $data['nombre'],
+            $data['email'],
+            $data['telefono'],
+            $data['documento'] ?? '',
+            $data['metodo_pago']
+        ]);
+        
+        $pedido_id = $pdo->lastInsertId();
+        
+        // Insertar detalles del pedido
+        $stmt_detalle = $pdo->prepare("
+            INSERT INTO Pedido_detalles (id_pedido, id_producto, cantidad, precio) 
+            VALUES (?, ?, ?, ?)
+        ");
+        
+        foreach ($data['items'] as $item) {
+            // Verificar stock disponible
+            $stmt_stock = $pdo->prepare("SELECT stock FROM Productos WHERE id_producto = ?");
+            $stmt_stock->execute([$item['id']]);
+            $stock_actual = $stmt_stock->fetchColumn();
+            
+            if ($stock_actual < $item['quantity']) {
+                $stmt_producto = $pdo->prepare("SELECT nombre FROM Productos WHERE id_producto = ?");
+                $stmt_producto->execute([$item['id']]);
+                $nombre_producto = $stmt_producto->fetchColumn();
+                throw new Exception("Stock insuficiente para el producto: {$nombre_producto}");
+            }
+            
+            $stmt_detalle->execute([
+                $pedido_id,
+                $item['id'],
+                $item['quantity'],
+                $item['price']
+            ]);
         }
     }
     
     // Confirmar transacción
-    mysqli_commit($conexion);
-    
-    // Generar número de pedido formateado
-    $order_number = 'PED-' . str_pad($id_venta, 6, '0', STR_PAD_LEFT);
+    $pdo->commit();
     
     echo json_encode([
-        'success' => true,
-        'order_id' => $order_number,
-        'message' => 'Pedido procesado exitosamente'
+        'success' => true, 
+        'message' => 'Pedido procesado exitosamente',
+        'pedido_id' => $pedido_id
     ]);
-    
-} catch (Exception $e) {
-    // Rollback en caso de error
-    mysqli_rollback($conexion);
-    
-    echo json_encode([
-        'success' => false,
-        'error' => $e->getMessage()
-    ]);
-}
 
-mysqli_close($conexion);
+} catch (Exception $e) {
+    // Revertir transacción en caso de error
+    if (isset($pdo)) {
+        $pdo->rollBack();
+    }
+    echo json_encode(['success' => false, 'error' => $e->getMessage()]);
+}
 ?>

@@ -44,6 +44,19 @@ $productos = isset($_SESSION['productos']) ? $_SESSION['productos'] : [];
                 Total de productos: <strong><?php echo count($productos); ?></strong>
             </p>
         </div>
+		<div class="category-filter">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h5 class="mb-3 mb-md-0">Filtrar por categoría:</h5>
+                    </div>
+                    <div class="col-md-6">
+                        <select class="form-select" id="categoryFilter" onchange="filterProducts()">
+                            <option value="">Todas las categorías</option>
+                            <!-- Las categorías se cargarán dinámicamente -->
+                        </select>
+                    </div>
+                </div>
+            </div>
         <div class="action-buttons">
             <a href="index.php?opc=agregar_producto" class="btn-action btn-success-custom">
                 <i class="fas fa-plus"></i>
@@ -64,8 +77,10 @@ $productos = isset($_SESSION['productos']) ? $_SESSION['productos'] : [];
                         <th width="10%">Precio</th>
                         <th width="8%">Stock</th>
                         <th width="12%">Categoría</th>
+						<?php if($_SESSION['esAdmin']): ?>
                         <th width="12%">Proveedor</th>
                         <th width="15%">Acciones</th>
+						<?php endif; ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -112,11 +127,13 @@ $productos = isset($_SESSION['productos']) ? $_SESSION['productos'] : [];
                                     <?php echo htmlspecialchars($producto['categoria_nombre'] ?? 'Sin categoría'); ?>
                                 </span>
                             </td>
+							<?php if($_SESSION['esAdmin']): ?>
                             <td>
                                 <span class="badge bg-secondary">
                                     <?php echo htmlspecialchars($producto['proveedor_nombre'] ?? 'Sin proveedor'); ?>
                                 </span>
                             </td>
+							
                             <td>
                                 <div class="btn-group" role="group">
                                     <a href="index.php?opc=editar_producto&id=<?php echo $producto['id_producto']; ?>" 
@@ -132,6 +149,7 @@ $productos = isset($_SESSION['productos']) ? $_SESSION['productos'] : [];
                                     </a>
                                 </div>
                             </td>
+							<?php endif; ?>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

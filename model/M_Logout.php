@@ -17,6 +17,6 @@ if (ini_get("session.use_cookies")) {
 session_destroy();
 
 // Redirigir al usuario al login con mensaje de logout exitoso
-header("Location: ../index.php?opc=login&message=logout");
+header("Location: ../index.php");
 exit;
 ?>

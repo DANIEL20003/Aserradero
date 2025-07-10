@@ -113,7 +113,7 @@ if (!isset($_SESSION['sesion_iniciada']) || $_SESSION['sesion_iniciada'] !== "in
 				
 				<ul class="navbar-nav">
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 							<i class="fas fa-user"></i>
 							<?php echo htmlspecialchars($_SESSION['nombre']); ?>
 						</a>
@@ -192,11 +192,27 @@ if (!isset($_SESSION['sesion_iniciada']) || $_SESSION['sesion_iniciada'] !== "in
 									</div>
 									<div class="col-md-6 mb-3">
 										<label class="form-label">Documento de identidad</label>
-										<input type="text" class="form-control" id="cedula" 
+										<input type="text" class="form-control" id="documento" 
 											value="<?php echo htmlspecialchars($_SESSION['cedula']); ?>">
 									</div>
 								</div>
 								
+								<h6 class="mt-4 mb-3"><i class="fas fa-map-marker-alt"></i> Información de entrega</h6>
+								<div class="row">
+									<div class="col-md-8 mb-3">
+										<label class="form-label">Dirección de entrega *</label>
+										<input type="text" class="form-control" id="direccion" placeholder="Ej: Av. Principal 123, Sector Norte" required>
+									</div>
+									<div class="col-md-4 mb-3">
+										<label class="form-label">Ciudad *</label>
+										<input type="text" class="form-control" id="ciudad" placeholder="Ej: Quito" required>
+									</div>
+								</div>
+
+								<div class="mb-3">
+									<label class="form-label">Comentarios adicionales</label>
+									<textarea class="form-control" id="comentarios" rows="3" placeholder="Referencias adicionales, horario preferido de entrega, etc."></textarea>
+								</div>
 								
 								<h6 class="mt-4 mb-3"><i class="fas fa-credit-card"></i> Método de pago</h6>
 
@@ -205,8 +221,7 @@ if (!isset($_SESSION['sesion_iniciada']) || $_SESSION['sesion_iniciada'] !== "in
 										<input class="form-check-input" type="radio" name="metodo_pago" id="efectivo"
 											value="efectivo" checked>
 										<label class="form-check-label" for="efectivo">
-											<i class="fas fa-money-bill text-success"></i> Pago en efectivo (contra
-											entrega)
+											<i class="fas fa-money-bill text-success"></i> Pago en efectivo (contra entrega)
 										</label>
 									</div>
 									<div class="form-check mb-2">
@@ -370,11 +385,11 @@ if (!isset($_SESSION['sesion_iniciada']) || $_SESSION['sesion_iniciada'] !== "in
 				nombre: document.getElementById('nombre').value,
 				email: document.getElementById('email').value,
 				telefono: document.getElementById('telefono').value,
-				documento: document.getElementById('cedula').value,
-				direccion: 'Por definir', // Campo temporal hasta agregar al formulario
-				ciudad: 'Por definir', // Campo temporal hasta agregar al formulario
+				documento: document.getElementById('documento').value,
+				direccion: document.getElementById('direccion').value,
+				ciudad: document.getElementById('ciudad').value,
 				metodo_pago: document.querySelector('input[name="metodo_pago"]:checked').value,
-				comentarios: '', // Campo temporal hasta agregar al formulario
+				comentarios: document.getElementById('comentarios').value,
 				items: cart,
 				subtotal: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
 				costo_envio: costoEnvio,

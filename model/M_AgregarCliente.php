@@ -39,11 +39,11 @@ if (mysqli_num_rows($resultado_verificar_cedula) > 0) {
 }
 
 // Encriptar la contraseña
-$clave_encriptada = password_hash($clave, PASSWORD_DEFAULT);
+// $clave_encriptada = password_hash($clave, PASSWORD_DEFAULT);
 
 // Insertar cliente
 $sql_insert_cliente = "INSERT INTO Usuarios (nombre, correo, cedula, clave, fecha_registro) 
-                       VALUES ('$nombre', '$correo', '$cedula', '$clave_encriptada', NOW())";
+                       VALUES ('$nombre', '$correo', '$cedula', '$clave', NOW())";
 
 $resultado = mysqli_query($conexion, $sql_insert_cliente);
 

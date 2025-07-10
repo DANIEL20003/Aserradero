@@ -323,7 +323,7 @@ $nombre_usuario = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : '';
                             <i class="fas fa-tachometer-alt"></i>
                             Dashboard
                         </a>
-                        <a href="index.php?opc=logout" class="btn-logout" onclick="return confirm('¿Cerrar sesión?')">
+                        <a href="./model/M_Logout.php" class="btn-logout" onclick="return confirm('¿Cerrar sesión?')">
                             <i class="fas fa-sign-out-alt"></i>
                             Cerrar Sesión
                         </a>
@@ -382,7 +382,7 @@ $nombre_usuario = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : '';
                     <?php endif; ?>
                 </div>
                 <div class="col-md-4 text-md-end">
-                    <?php if (isset($header_actions) && !empty($header_actions)): ?>
+                    <?php if (isset($header_actions) && !empty($header_actions) && $_SESSION['esAdmin']): ?>
                         <div class="action-buttons">
                             <?php foreach ($header_actions as $action): ?>
                                 <a href="<?php echo htmlspecialchars($action['url']); ?>" 

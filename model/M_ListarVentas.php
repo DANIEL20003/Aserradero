@@ -16,12 +16,15 @@ try {
                 p.estado,
                 p.creado_en,
                 p.activo,
+                p.receptor,
+                p.correo,
+                p.telefono,
+                p.identificacion,
+                p.metodo_pago,
                 u.nombre as cliente_nombre,
-                u.cedula as cliente_cedula,
-                f.id_factura
+                u.cedula as cliente_cedula
             FROM Pedidos p
             LEFT JOIN Usuarios u ON p.id_usuario = u.id_usuario
-            LEFT JOIN Facturas f ON p.id_pedido = f.id_pedido
             WHERE p.activo = 1
             ORDER BY p.creado_en DESC";
 

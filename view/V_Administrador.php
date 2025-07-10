@@ -221,7 +221,7 @@ if (!isset($_SESSION['sesion_iniciada']) || $_SESSION['sesion_iniciada'] !== "in
             <?php if (isset($_SESSION['esAdmin']) && $_SESSION['esAdmin']): ?>
                 <span class="admin-badge">Admin</span>
             <?php endif; ?>
-            <a href="index.php?opc=logout" class="logout-btn" onclick="return confirm('¿Cerrar sesión?')">
+            <a href="./model/M_Logout.php" class="logout-btn" onclick="return confirm('¿Cerrar sesión?')">
                 <i class="fas fa-sign-out-alt"></i>
                 Cerrar Sesión
             </a>
@@ -247,14 +247,17 @@ if (!isset($_SESSION['sesion_iniciada']) || $_SESSION['sesion_iniciada'] !== "in
                         <i class="fas fa-list"></i>
                         Listar Productos
                     </a>
+					<?php if($_SESSION['esAdmin']): ?>
                     <a href="?opc=agregar_producto" class="btn btn-secondary">
                         <i class="fas fa-plus"></i>
                         Agregar Producto
                     </a>
+					<?php endif; ?>
                 </div>
             </div>
 
             <!-- Compras -->
+			<?php if($_SESSION['esAdmin']): ?>
             <div class="card">
                 <div class="card-header">
                     <i class="fas fa-shopping-cart card-icon"></i>
@@ -267,8 +270,10 @@ if (!isset($_SESSION['sesion_iniciada']) || $_SESSION['sesion_iniciada'] !== "in
                     </a>
                 </div>
             </div>
+			<?php endif; ?>
 
             <!-- Categorías -->
+			 <?php if($_SESSION['esAdmin']): ?>
             <div class="card">
                 <div class="card-header">
                     <i class="fas fa-tags card-icon"></i>
@@ -285,8 +290,10 @@ if (!isset($_SESSION['sesion_iniciada']) || $_SESSION['sesion_iniciada'] !== "in
                     </a>
                 </div>
             </div>
+			<?php endif; ?>
 
             <!-- Proveedores -->
+			 <?php if($_SESSION['esAdmin']): ?>
             <div class="card">
                 <div class="card-header">
                     <i class="fas fa-truck card-icon"></i>
@@ -303,8 +310,10 @@ if (!isset($_SESSION['sesion_iniciada']) || $_SESSION['sesion_iniciada'] !== "in
                     </a>
                 </div>
             </div>
+			<?php endif; ?>
 
             <!-- Ventas -->
+
             <div class="card">
                 <div class="card-header">
                     <i class="fas fa-cash-register card-icon"></i>
@@ -322,7 +331,48 @@ if (!isset($_SESSION['sesion_iniciada']) || $_SESSION['sesion_iniciada'] !== "in
                 </div>
             </div>
 
+            <!-- Pedidos -->
+            <?php if($_SESSION['esAdmin']): ?>
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-clipboard-list card-icon"></i>
+                    <h2 class="card-title">Gestión de Pedidos</h2>
+                </div>
+                <div class="card-actions">
+                    <a href="?opc=gestion_pedidos" class="btn btn-primary">
+                        <i class="fas fa-list"></i>
+                        Ver Todos los Pedidos
+                    </a>
+                    <a href="?opc=checkout_admin" class="btn btn-secondary">
+                        <i class="fas fa-plus"></i>
+                        Crear Pedido para Cliente
+                    </a>
+                </div>
+            </div>
+            <?php endif; ?>
+
+            <!-- Mis Pedidos (para usuarios normales) -->
+            <?php if(!$_SESSION['esAdmin']): ?>
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-clipboard-list card-icon"></i>
+                    <h2 class="card-title">Mis Pedidos</h2>
+                </div>
+                <div class="card-actions">
+                    <a href="?opc=mis_pedidos" class="btn btn-primary">
+                        <i class="fas fa-list"></i>
+                        Ver Mis Pedidos
+                    </a>
+                    <a href="?opc=checkout" class="btn btn-secondary">
+                        <i class="fas fa-shopping-cart"></i>
+                        Realizar Pedido
+                    </a>
+                </div>
+            </div>
+            <?php endif; ?>
+
             <!-- Clientes -->
+			 <?php if($_SESSION['esAdmin']): ?>
             <div class="card">
                 <div class="card-header">
                     <i class="fas fa-users card-icon"></i>
@@ -339,6 +389,7 @@ if (!isset($_SESSION['sesion_iniciada']) || $_SESSION['sesion_iniciada'] !== "in
                     </a>
                 </div>
             </div>
+			<?php endif; ?>
         </div>
     </div>
 

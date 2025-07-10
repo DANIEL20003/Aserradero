@@ -58,12 +58,11 @@ $ventas = isset($_SESSION['ventas']) ? $_SESSION['ventas'] : [];
                 <thead>
                     <tr>
                         <th width="8%">ID</th>
-                        <th width="20%">Cliente</th>
+                        <th width="25%">Cliente</th>
                         <th width="15%">Total</th>
                         <th width="12%">Estado</th>
-                        <th width="15%">Fecha</th>
-                        <th width="15%">Factura</th>
-                        <th width="15%">Acciones</th>
+                        <th width="20%">Fecha</th>
+                        <th width="20%">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -98,15 +97,6 @@ $ventas = isset($_SESSION['ventas']) ? $_SESSION['ventas'] : [];
                                 </small>
                             </td>
                             <td>
-                                <?php if (!empty($venta['id_factura'])): ?>
-                                    <span class="badge bg-info">
-                                        Factura #<?php echo htmlspecialchars($venta['id_factura']); ?>
-                                    </span>
-                                <?php else: ?>
-                                    <span class="text-muted">Sin factura</span>
-                                <?php endif; ?>
-                            </td>
-                            <td>
                                 <div class="btn-group" role="group">
                                     <a href="index.php?opc=ver_venta&id=<?php echo $venta['id_pedido']; ?>" 
                                        class="btn btn-sm btn-outline-info" 
@@ -120,9 +110,10 @@ $ventas = isset($_SESSION['ventas']) ? $_SESSION['ventas'] : [];
                                             <i class="fas fa-edit"></i>
                                         </a>
                                     <?php endif; ?>
-                                    <a href="./model/M_GenerarFactura.php?id=<?php echo $venta['id_pedido']; ?>" 
+                                    <a href="index.php?opc=generar_factura&pedido_id=<?php echo $venta['id_pedido']; ?>" 
                                        class="btn btn-sm btn-outline-success" 
-                                       title="Generar factura">
+                                       title="Generar factura"
+                                       target="_blank">
                                         <i class="fas fa-file-invoice"></i>
                                     </a>
                                 </div>

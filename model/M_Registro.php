@@ -84,7 +84,7 @@ if (mysqli_num_rows($result_cedula) > 0) {
 }
 
 // Hash de la contraseña
-$clave_hash = password_hash($clave, PASSWORD_DEFAULT);
+// $clave_hash = password_hash($clave, PASSWORD_DEFAULT);
 
 // Insertar el nuevo usuario usando prepared statement
 $sql_insert = "INSERT INTO Usuarios (nombre, correo, cedula, clave, fecha_registro, activo) 
@@ -97,7 +97,7 @@ if (!$stmt_insert) {
     exit;
 }
 
-mysqli_stmt_bind_param($stmt_insert, "ssss", $nombre, $correo, $cedula, $clave_hash);
+mysqli_stmt_bind_param($stmt_insert, "ssss", $nombre, $correo, $cedula, $clave);
 $resultado = mysqli_stmt_execute($stmt_insert);
 
 if ($resultado) {

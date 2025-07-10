@@ -82,6 +82,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#productos">Productos</a>
                     </li>
+                    <?php if (isset($_SESSION['sesion_iniciada']) && $_SESSION['sesion_iniciada'] === "iniciado"): ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php?opc=mis_pedidos">Mis Pedidos</a>
+                    </li>
+                    <?php endif; ?>
                 </ul>
                 
                 <ul class="navbar-nav">
@@ -91,23 +96,32 @@
                             <span class="cart-badge" id="cartBadge" style="display: none;">0</span>
                         </a>
                     </li>
-                    <?php if (session_status() == PHP_SESSION_NONE) session_start(); ?>
                     <?php if (isset($_SESSION['sesion_iniciada']) && $_SESSION['sesion_iniciada'] === "iniciado"): ?>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
-                                <i class="fas fa-user"></i>
-                                <?php echo htmlspecialchars($_SESSION['nombre']); ?>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="index.php?opc=dashboard">
-                                    <i class="fas fa-tachometer-alt"></i> Dashboard
-                                </a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="index.php?opc=logout">
-                                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
-                                </a></li>
-                            </ul>
-                        </li>
+                    <li class="nav-item d-lg-none">
+                        <a class="nav-link" href="./model/M_Logout.php">
+                            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user"></i>
+                            <?php echo htmlspecialchars($_SESSION['nombre']); ?>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="index.php?opc=mis_pedidos">
+                                <i class="fas fa-shopping-bag"></i> Mis Pedidos
+                            </a></li>
+                            <?php if (isset($_SESSION['esAdmin']) && $_SESSION['esAdmin']): ?>
+                            <li><a class="dropdown-item" href="index.php?opc=dashboard">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a></li>
+                            <?php endif; ?>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="./model/M_Logout.php" onclick="return confirm('¿Desea cerrar la sesión?')">
+                                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                            </a></li>
+                        </ul>
+                    </li>
                     <?php else: ?>
                         <li class="nav-item">
                             <a class="nav-link" href="index.php?opc=login">
@@ -230,6 +244,21 @@
             loadProducts();
             loadCategories();
             updateCartBadge();
+            
+            // Initialize Bootstrap components
+            // Enable dropdowns
+            document.querySelectorAll('.dropdown-toggle').forEach(function(element) {
+                new bootstrap.Dropdown(element);
+            });
+            
+            // Add click event to dropdown items to ensure they work
+            document.querySelectorAll('.dropdown-item').forEach(function(element) {
+                element.addEventListener('click', function(e) {
+                    if (this.getAttribute('href') === '#') {
+                        e.preventDefault();
+                    }
+                });
+            });
         });
 
         async function loadProducts() {
@@ -351,13 +380,25 @@
         }
 
         function filterProducts() {
-            const categoryId = document.getElementById('categoryFilter').value;
+            const categoryFilter = document.getElementById('categoryFilter');
+            const categoryId = categoryFilter ? categoryFilter.value : '';
             
             if (!categoryId) {
                 displayProducts(products);
             } else {
                 const filtered = products.filter(product => product.id_categoria == categoryId);
                 displayProducts(filtered);
+                
+                // Scroll to products section after filtering
+                document.getElementById('productos').scrollIntoView({ behavior: 'smooth' });
+            }
+            
+            // Add visual indication that filter was applied
+            if (categoryFilter) {
+                categoryFilter.classList.add('border-success');
+                setTimeout(() => {
+                    categoryFilter.classList.remove('border-success');
+                }, 1000);
             }
         }
 
